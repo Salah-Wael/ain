@@ -8,10 +8,12 @@ use App\Http\Controllers\Back\Auth\RegisteredAdminController;
 use App\Http\Controllers\Back\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Back\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Back\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Back\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Back\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Back\RoleController;
+use App\Http\Controllers\Back\AdminController;
+use App\Http\Controllers\Back\BackHomeController;
+use App\Http\Controllers\Back\PermissionController;
 
-Route::prefix('/back')->name('back.')->middleware('guest')->group(function () {
+Route::prefix('/back')->name('back.')->group(function () {
     Route::get('/register', [RegisteredAdminController::class, 'create'])
         ->name('register');
 
@@ -37,7 +39,7 @@ Route::prefix('/back')->name('back.')->middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::prefix('/back')->name('back.')->middleware('admin')->group(function () {
+Route::prefix('/back')->name('back.')->group(function () {
 
     Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
         ->middleware(['signed', 'throttle:6,1'])
@@ -53,4 +55,21 @@ Route::prefix('/back')->name('back.')->middleware('admin')->group(function () {
 });
 
 Route::post('/back/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->name('back.logout')->middleware('admin');
+    ->name('back.logout');
+
+Route::prefix('/back')->name('back.')->group(function () {
+
+    Route::get('/admin', BackHomeController::class)->name('index');
+    Route::resource('admins', AdminController::class);
+
+    Route::resource('permissions', PermissionController::class)->except(['show']);
+
+    Route::prefix('roles')->name('roles.')->controller(RoleController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{role}/edit', 'edit')->name('edit');
+        Route::put('/{role}', 'update')->name('update');
+        Route::delete('/{role}', 'destroy')->name('destroy');
+    });
+});
