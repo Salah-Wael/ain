@@ -9,10 +9,7 @@ class ImageController extends Controller
 {
     public static function storeImage($request, string $columnName, string $pathAfterPublic)
     {
-        // Check if the file exists in the request
-        if (!$request->hasFile($columnName)) {
-            return null; // Handle this gracefully in your calling code
-        }
+
 
         $image = $request->file($columnName);
         $imageName = uniqid() . $image->getClientOriginalName();
@@ -24,11 +21,6 @@ class ImageController extends Controller
 
     public static function storeImages($request, string $columnName, string $pathAfterPublic,)
     {
-        // Check if the request has multiple images
-        if (!$request->hasFile($columnName)) {
-            return []; // Return an empty array if no files are provided
-        }
-
         $imagePaths = [];
 
         // Check if the request has multiple images
@@ -49,15 +41,7 @@ class ImageController extends Controller
 
     public static function deleteImage($imageName, string $pathAfterPublic)
     {
-        $fullPath = public_path(trim($pathAfterPublic, '/')) . '/' . $imageName;
-
-        if (File::exists($fullPath)) {
-            File::delete($fullPath);
-            return true; // Deletion successful
-        }
-
-        return false; // File not found
-        // File::delete(public_path($pathAfterPublic) . $imageName);
+        File::delete(public_path($pathAfterPublic) . $imageName);
     }
 
     public static function deleteImages(array $imageNames, string $pathAfterPublic)

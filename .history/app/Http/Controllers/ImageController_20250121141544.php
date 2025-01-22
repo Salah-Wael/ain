@@ -57,7 +57,7 @@ class ImageController extends Controller
         }
 
         return false; // File not found
-        // File::delete(public_path($pathAfterPublic) . $imageName);
+        File::delete(public_path($pathAfterPublic) . $imageName);
     }
 
     public static function deleteImages(array $imageNames, string $pathAfterPublic)

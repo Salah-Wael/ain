@@ -103,7 +103,7 @@
         </li>
 
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Guards</span>
+            <span class="menu-header-text">Pages</span>
         </li>
         {{-- @role('Super-Admin') --}}
             <li class="menu-item">

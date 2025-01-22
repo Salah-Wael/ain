@@ -49,15 +49,7 @@ class ImageController extends Controller
 
     public static function deleteImage($imageName, string $pathAfterPublic)
     {
-        $fullPath = public_path(trim($pathAfterPublic, '/')) . '/' . $imageName;
-
-        if (File::exists($fullPath)) {
-            File::delete($fullPath);
-            return true; // Deletion successful
-        }
-
-        return false; // File not found
-        // File::delete(public_path($pathAfterPublic) . $imageName);
+        File::delete(public_path($pathAfterPublic) . $imageName);
     }
 
     public static function deleteImages(array $imageNames, string $pathAfterPublic)
