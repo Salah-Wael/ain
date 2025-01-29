@@ -1,4 +1,4 @@
-@extends('back.master')
+@extends('layouts.app')
 
 @section('title', 'Edit Permission')
 
@@ -34,29 +34,6 @@
                     </label>
                 </div>
             @endforeach
-
-            <div class="form-group col-12 mt-2">
-                <div class="row">
-                    @forelse ($roles as $role)
-                        <div class="col-md-6">
-                            <div class="form-check form-check-primary mt-1">
-                                <input class="form-check-input" type="checkbox"
-                                name="roleArray[{{ $role->name }}]"
-                                value="{{ $role->name }}"
-                                id="formCheckcolor{{ $role->name }}"
-                                    @if($permission->roles->contains($role->id)) checked @endif>
-                                <label class="form-check-label"
-                                for="formCheckcolor
-                                {{ $role->name }}">
-                                    {{ displayRole($role->name) }}
-                                </label>
-                            </div>
-                        </div>
-                    @empty
-                        <p>No roles found.</p>
-                    @endforelse
-                </div>
-            </div>
 
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary" style="background-color: #696CFF">Update Permission</button>

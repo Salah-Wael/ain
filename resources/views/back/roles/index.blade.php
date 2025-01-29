@@ -1,4 +1,4 @@
-@extends('back.master')
+@extends('layouts.app')
 @section('title', __('lang.roles'))
 @section('roles_active', 'active bg-light')
 @includeIf("$directory.pushStyles")

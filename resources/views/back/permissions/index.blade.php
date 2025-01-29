@@ -1,9 +1,17 @@
-@extends('back.master')
+@extends('layouts.app')
 
 @section('title', 'Permissions List')
 
 @section('content')
     <div class="container mt-5">
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <h2>Permissions</h2>
         <a href="{{ route('back.permissions.create') }}" class="btn btn-primary mb-4" style="background-color: #696CFF">Create Permission</a>
 
@@ -39,7 +47,6 @@
                                     </td>
                                 @endif
                         <td>
-                            <a href="{{ route('back.permissions.edit', $permission->id) }}" class="btn btn-sm btn-warning">Edit</a>
                             <form action="{{ route('back.permissions.destroy', $permission->id) }}" method="POST" style="display:inline-block">
                                 @csrf
                                 @method('DELETE')

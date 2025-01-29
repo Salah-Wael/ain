@@ -25,7 +25,7 @@ class PermissionController extends Controller implements HasMiddleware
     // Index method to display all permissions
     public function index()
     {
-        $permissions = Permission::with('roles')->orderBy('permissions.guard_name', )->orderBy('permissions.name')->get();
+        $permissions = Permission::with('roles')->orderBy('permissions.name',)->get();
         return view('back.permissions.index', compact('permissions'));
     }
 
@@ -39,60 +39,30 @@ class PermissionController extends Controller implements HasMiddleware
     // Store method to save the new Permission
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'guard_name' => 'required|string|max:255',
-            'roleArray.*' => 'nullable',
+        // التحقق من صحة الإدخال
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255','roleArray' => 'required', // التأكد من أن roleArray مصفوفة
+            // 'roleArray.*' => 'required|in:web,admin,doctor,head', // التحقق من الحراس الموجودة فقط
         ]);
 
-        $permission = Permission::create([
-            'name' => str_replace(' ', '_', strtolower( $request->name)),
-            'guard_name' => $request->guard_name,
-        ]);
+        // إنشاء الإذن وربطه بالأدوار
+        foreach (array_keys($validatedData['roleArray']) as $roleGuardName) {
+            // إنشاء الإذن
+            $permission = Permission::updateOrCreate([
+                'name' => str_replace(' ', '_', strtolower($validatedData['name'])),
+                'guard_name' => $roleGuardName,
+            ]);
 
-        if ($request->has('roleArray')) {
+            // البحث عن الدور وربط الإذن به
+            $assignedRole = Role::where('guard_name', $roleGuardName)->first();
 
-            $roles = Role::whereIn('name', array_keys($request->roleArray))->get();  // Get roles based on Names
-            foreach ($roles as $role) {
-                $role->givePermissionTo($permission);
+            if ($assignedRole) {
+                $assignedRole->givePermissionTo($permission);
             }
         }
 
+        // إظهار رسالة نجاح
         Session::flash('success', 'Permission created successfully!');
-        return redirect()->route('back.permissions.index');
-    }
-
-    // Edit method to show the form for editing an existing Permission
-    public function edit($id)
-    {
-        $permission = Permission::findOrFail($id);
-        $roles = Role::get();
-
-        return view('back.permissions.edit', compact('permission', 'roles'))
-            ->with(['guardsArray' => $this->guardsArray]);
-    }
-
-    // Update method to save changes to the Permission
-    public function update(Request $request, $id)
-    {
-        $permission = Permission::findOrFail($id);
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'guard_name' => 'required|string|max:255',
-            'roleArray.*' => 'nullable',
-        ]);
-
-        // Update the permission
-        $permission->update([
-            'name' => str_replace(' ', '_', strtolower($request->name)),
-            'guard_name' => $request->guard_name,
-        ]);
-
-        // Sync roles
-        $roles = array_keys($request->input('roleArray', []));
-        $permission->syncRoles($roles);  // syncRoles will update the roles associated with the permission
-
-        Session::flash('success', 'Permission updated successfully!');
         return redirect()->route('back.permissions.index');
     }
 
