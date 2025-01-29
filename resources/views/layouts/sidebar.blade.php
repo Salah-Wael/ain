@@ -70,7 +70,17 @@
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item active">
-            <a href="{{ route('back.index') }}" class="menu-link">
+                @if(Auth::guard('admin')->check())
+                    <a href="{{ route('back.index') }}" class="menu-link">
+                @elseif(Auth::guard('web')->check())
+                    <a href="{{ route('front.index') }}" class="menu-link">
+                @elseif(Auth::guard('head')->check())
+                    <a href="{{ route('head.index') }}" class="menu-link">
+                @elseif(Auth::guard('doctor')->check())
+                    <a href="{{ route('doctor.index') }}" class="menu-link">
+                @else
+                    <a href="{{ route('front.index') }}" class="menu-link">
+                @endif
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
