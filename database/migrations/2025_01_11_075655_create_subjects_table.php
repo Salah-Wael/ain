@@ -20,13 +20,13 @@ return new class extends Migration
             $table->unsignedTinyInteger('academic_year_id');
             $table->foreign('academic_year_id')->references('id')->on('academic_years')->onDelete('cascade');
 
-            $table->unique(['name', 'academic_year_id']);
-
             $table->unsignedTinyInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
 
             $table->unsignedTinyInteger('semester_id');
             $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');
+
+            $table->unique(['name', 'academic_year_id', 'semester_id']);
 
             $table->timestamps();
         });

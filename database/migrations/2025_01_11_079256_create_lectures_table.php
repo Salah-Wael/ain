@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('lectures', function (Blueprint $table) {
             $table->unsignedMediumInteger('id')->autoIncrement();
             $table->string('name', 255);
+            
             $table->unsignedSmallInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
 

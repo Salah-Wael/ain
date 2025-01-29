@@ -17,6 +17,7 @@ use Database\Seeders\AcademicYearSeeder;
 use Database\Seeders\DoctorSubjectSeeder;
 use Database\Seeders\StudentSubjectSeeder;
 use Database\Seeders\HeadOfDepartmentSeeder;
+use Database\Seeders\PermissionsAndRolesSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
             DoctorSubjectSeeder::class,
             StudentSubjectSeeder::class,
             LectureSeeder::class,
+            PermissionsAndRolesSeeder::class,
         ]);
     }
 }

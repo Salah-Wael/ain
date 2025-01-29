@@ -1,4 +1,4 @@
-@extends('back.master')
+@extends('layouts.app')
 
 @section('title', 'Create Admin')
 

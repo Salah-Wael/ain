@@ -29,15 +29,8 @@
       <div class="layout-container">
 
         {{-- Include the appropriate sidebar --}}
-        @if(Auth::guard('admin')->check())
-          @include('back.partials.sidebar')
-        @elseif(Auth::guard('web')->check())
-          @include('front.partials.sidebar')
-        @elseif(Auth::guard('head')->check())
-          @include('head.partials.sidebar')
-        @elseif(Auth::guard('doctor')->check())
-          @include('doctor.partials.sidebar')
-        @endif
+        @include('layouts.sidebar')
+
 
         <!-- Layout container -->
         <div class="layout-page">
@@ -62,15 +55,7 @@
             <!-- / Content -->
 
             {{-- Include the appropriate footer --}}
-            @if(Auth::guard('admin')->check())
-              @include('back.partials.footer')
-            @elseif(Auth::guard('web')->check())
-              @include('front.partials.footer')
-            @elseif(Auth::guard('head')->check())
-              @include('head.partials.footer')
-            @elseif(Auth::guard('doctor')->check())
-              @include('doctor.partials.footer')
-            @endif
+            @include('layouts.footer')
 
             <div class="content-backdrop fade"></div>
           </div>
