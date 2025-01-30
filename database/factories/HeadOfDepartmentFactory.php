@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Doctor;
 use App\Models\Department;
+use App\Models\HeadOfDepartment;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -12,9 +12,9 @@ use Spatie\Permission\Models\Role;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Doctor>
  */
-class DoctorFactory extends Factory
+class HeadOfDepartmentFactory extends Factory
 {
-    protected $model = Doctor::class; // Ensure this is correct
+    protected $model = HeadOfDepartment::class; // Ensure this is correct
     /**
      * Define the model's default state.
      *
@@ -24,18 +24,19 @@ class DoctorFactory extends Factory
     {
         return [
             'name' => $this->faker->name, // Generate a random name
-            // 'email' => $this->faker->unique()->safeEmail, // Generate a unique email
-            // 'email_verified_at' => now(),
+            'email' => $this->faker->unique()->safeEmail, // Generate a unique email
+            'email_verified_at' => now(),
             'password' => bcrypt(123456789), // Default password (you can change it)
             'department_id' => Department::inRandomOrder()->first()->id, // Random department_id from departments table
-            // 'remember_token' => Str::random(10), // Random remember token
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 
     public function configure(): static
     {
-        return $this->afterCreating(function (Doctor $doctor) {
-            $doctor->assignRole('Doctor');
+        return $this->afterCreating(function (HeadOfDepartment $head) {
+            $head->assignRole('Head-Of-Department');
         });
     }
 }

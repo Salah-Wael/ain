@@ -17,8 +17,7 @@ class PermissionController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            // new Middleware('', only: ['index']),
-            // new Middleware('', except: ['store']),
+            new Middleware('role:Super-Admin', only: ['create', 'store', 'destroy']),
         ];
     }
 

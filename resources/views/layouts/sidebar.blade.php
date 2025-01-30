@@ -3,15 +3,15 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         @if (Auth::guard('admin')->check())
-            <a href="{{ route('back.index') }}" class="app-brand-link">
+            <a href="{{ route('back.index') }}" class="app-brand-link">admin
         @elseif(Auth::guard('web')->check())
-            <a href="{{ route('front.index') }}" class="app-brand-link">
+            <a href="{{ route('front.index') }}" class="app-brand-link">student
         @elseif(Auth::guard('head')->check())
-            <a href="{{ route('head.index') }}" class="app-brand-link">
+            <a href="{{ route('head.index') }}" class="app-brand-link">head of department
         @elseif(Auth::guard('doctor')->check())
-            <a href="{{ route('doctor.index') }}" class="app-brand-link">
+            <a href="{{ route('doctor.index') }}" class="app-brand-link">doctor
         @else
-            <a href="{{ route('front.index') }}" class="app-brand-link">
+            <a href="{{ route('front.index') }}" class="app-brand-link">student
         @endif
         <span class="app-brand-logo demo">
             <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -86,65 +86,31 @@
             </a>
         </li>
 
-        <!-- Layouts -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Layouts</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="layouts-without-menu.html" class="menu-link">
-                        <div data-i18n="Without menu">Without menu</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Without navbar</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-container.html" class="menu-link">
-                        <div data-i18n="Container">Container</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-fluid.html" class="menu-link">
-                        <div data-i18n="Fluid">Fluid</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-blank.html" class="menu-link">
-                        <div data-i18n="Blank">Blank</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Guards</span>
         </li>
-        {{-- @role('Super-Admin') --}}
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Admins</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('back.admins.index') }}" class="menu-link">
-                        <div data-i18n="Connections">All</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('back.admins.create') }}" class="menu-link">
-                        <div data-i18n="Connections">Create</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        {{-- @endrole --}}
+
+        @role('Super-Admin', 'admin')
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Admins</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('back.admins.index') }}" class="menu-link">
+                            <div data-i18n="Connections">All</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('back.admins.create') }}" class="menu-link">
+                            <div data-i18n="Connections">Create</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endrole
+
 
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -201,44 +167,47 @@
             </ul>
         </li>
 
-        <!-- Components -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Roles</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('back.roles.index') }}" class="menu-link">
-                        <div data-i18n="Connections">All</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('back.roles.create') }}" class="menu-link">
-                        <div data-i18n="Connections">Create</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Permissions</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('back.permissions.index') }}" class="menu-link">
-                        <div data-i18n="Basic">All</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('back.permissions.create') }}" class="menu-link">
-                        <div data-i18n="Basic">Create</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @role('Super-Admin', 'admin')
+            <!-- Components -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Roles</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('back.roles.index') }}" class="menu-link">
+                            <div data-i18n="Connections">All</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('back.roles.create') }}" class="menu-link">
+                            <div data-i18n="Connections">Create</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                    <div data-i18n="Authentications">Permissions</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('back.permissions.index') }}" class="menu-link">
+                            <div data-i18n="Basic">All</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('back.permissions.create') }}" class="menu-link">
+                            <div data-i18n="Basic">Create</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endrole
+
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -258,30 +227,40 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-box"></i>
-                <div data-i18n="User interface">Excuses</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('excuses.index') }}" class="menu-link">
-                        <div data-i18n="Basic">Excuses</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('excuses.create') }}" class="menu-link">
-                        <div data-i18n="Accordion">Create</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('excuses.student') }}" class="menu-link">
-                        <div data-i18n="Alerts">Index</div>
-                    </a>
-                </li>
 
-            </ul>
-        </li>
+        {{-- @hasanyrole('Head-Of-Department'|'Student') --}}
+        @if(Auth::guard('head')->check() || auth()->user()?->hasRole('Student'))
+            <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-box"></i>
+                    <div data-i18n="User interface">Excuses</div>
+                </a>
+                <ul class="menu-sub">
+
+                    @role('Head-Of-Department', 'head')
+                        <li class="menu-item">
+                            <a href="{{ route('excuses.index') }}" class="menu-link">
+                                <div data-i18n="Basic">All Student's Excuses</div>
+                            </a>
+                        </li>
+                    @endrole
+
+                    @role('Student', 'web')
+                        <li class="menu-item">
+                            <a href="{{ route('excuses.create') }}" class="menu-link">
+                                <div data-i18n="Accordion">Create</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ route('excuses.student') }}" class="menu-link">
+                                <div data-i18n="Alerts">Index</div>
+                            </a>
+                        </li>
+                    @endrole
+
+                </ul>
+            </li>
+        @endif
 
     </ul>
 </aside>

@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-semibold d-block">{{ Auth::guard('head')->name }}</span>
-                                    <small class="text-muted">User</small>
+                                    <small class="text-muted">{{ Auth::guard('head')->user()->getRoleNames()->join(', ') }}</small>
                                 </div>
                             </div>
                         </a>

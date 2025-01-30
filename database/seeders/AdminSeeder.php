@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 
 class AdminSeeder extends Seeder
 {
@@ -14,7 +16,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('admins')->insert([
+        $superAdmin = Admin::create([
             'name' => 'Mohamed Abdelkawy',
             'email' => 'admin@example.com',  // Change this to your desired email
             'email_verified_at' => now(),   // Set to current time
@@ -23,5 +25,7 @@ class AdminSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        $superAdmin->assignRole('Super-Admin');
     }
 }

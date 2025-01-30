@@ -2,10 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Department;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Spatie\Permission\Models\Role;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -32,6 +34,13 @@ class UserFactory extends Factory
             'department_id' => Department::inRandomOrder()->first()->id, // Random department_id from departments table
 
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole('Student');
+        });
     }
 
     /**

@@ -39,8 +39,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">{{ Auth::guard('doctor')->name }}</span>
-                                    <small class="text-muted">User</small>
+                                    <span class="fw-semibold d-block">{{ Auth::guard('doctor')->user()?->name }}</span>
+                                    <small class="text-muted">{{ Auth::guard('doctor')->user()->getRoleNames()->join(', ') }}</small>
                                 </div>
                             </div>
                         </a>
