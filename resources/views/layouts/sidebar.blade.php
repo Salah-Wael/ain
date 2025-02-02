@@ -85,12 +85,12 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
-
+        @role('Super-Admin', 'admin')
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Guards</span>
         </li>
 
-        @role('Super-Admin', 'admin')
+
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -109,7 +109,7 @@
                     </li>
                 </ul>
             </li>
-        @endrole
+
 
 
         <li class="menu-item">
@@ -166,6 +166,7 @@
                 </li>
             </ul>
         </li>
+        @endrole
 
         @role('Super-Admin', 'admin')
             <!-- Components -->
@@ -220,11 +221,13 @@
                         <div data-i18n="Connections">All</div>
                     </a>
                 </li>
+                @role('Super-Admin', 'admin')
                 <li class="menu-item">
                     <a href="{{ route('subjects.create') }}" class="menu-link">
                         <div data-i18n="Connections">Create</div>
                     </a>
                 </li>
+                @endrole
             </ul>
         </li>
 

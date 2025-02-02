@@ -2,6 +2,29 @@
 
 use Illuminate\Support\Facades\Auth;
 
+if (!function_exists('sendResponse')) {
+    function sendResponse($result, $message, $statusCode = 200)
+    {
+        return response()->json([
+            'success' => true,
+            'data' => $result,
+            'message' => $message,
+        ], $statusCode);
+    }
+}
+
+if (!function_exists('sendError')) {
+
+    function sendError($error, $errorDetails = [], $statusCode = 400)
+    {
+        return response()->json([
+            'success' => false,
+            'message' => $error,
+            'errors' => $errorDetails,
+        ], $statusCode);
+    }
+}
+
 function displayRole($roleName){
     return ucwords(str_replace('-', ' ', strtolower($roleName)));
 }

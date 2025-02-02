@@ -19,7 +19,9 @@
                 <th>Department</th>
                 <th>Semester</th>
                 <th>Academic Year</th>
-                @role('Super-Admin', 'admin')<th>Actions</th>@endrole
+                @role('Super-Admin', 'admin')
+                    <th>Actions</th>
+                @endrole
             </tr>
         </thead>
         <tbody>
