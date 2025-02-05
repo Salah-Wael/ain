@@ -17,7 +17,7 @@ class ExcuseController extends Controller
 
     public function studentExcuses()
     {
-        $excuses = Excuse::with('student', 'images')
+        $excuses = Excuse::with('student', 'department', 'images')
             ->where('student_id', Auth::user()->id)
             ->get();
 
@@ -30,7 +30,7 @@ class ExcuseController extends Controller
 
     public function create()
     {
-        $data['departments'] = Department::get();
+        $data['departments'] = Department::pluck('name')->toArray();
         $data['materials'] = $this->materials;
 
         return sendResponse($data, 'data retrieved successfully.');
