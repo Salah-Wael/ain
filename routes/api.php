@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')
         Route::get('/', 'studentExcuses');
         Route::get('/create', 'create');
         Route::post('/', 'store');
-        Route::get('/{excuse_id}', 'show');
+        Route::get('/{excuse_id}', 'showMyExcuse');
         Route::put('/{id}', 'update');
         Route::delete('/{excuse}', 'destroy');
         Route::get('/{id}/edit', 'edit');
