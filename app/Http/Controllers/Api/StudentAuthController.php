@@ -38,7 +38,7 @@ class StudentAuthController extends Controller
 
         $user['token'] = $user->createToken('API Token')->plainTextToken;
 
-        return sendResponse([$user], __('messages.login_success'));
+        return sendResponse([$user], __('messages.login_successful'));
     }
 
     public function logout(Request $request)

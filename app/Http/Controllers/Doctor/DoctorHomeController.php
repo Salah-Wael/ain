@@ -14,7 +14,7 @@ class DoctorHomeController extends Controller implements HasMiddleware
     {
         return [
             new Middleware('auth:doctor'),
-            new Middleware('role:Doctor'),
+            // new Middleware('role:Doctor'),
         ];
     }
 
