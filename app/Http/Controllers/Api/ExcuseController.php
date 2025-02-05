@@ -13,24 +13,39 @@ use Illuminate\Support\Facades\Validator;
 
 class ExcuseController extends Controller
 {
+    public $materials = ['Medical Report', 'Medical Examinations' ,'Passport Photo', 'Other'];
+
     public function studentExcuses()
     {
         $excuses = Excuse::with('student', 'images')
-        ->where('student_id', Auth::user()->id)
+            ->where('student_id', Auth::user()->id)
             ->get();
+
+        if ($excuses->isEmpty()) {
+            return sendError('No excuses found for the student.');
+        }
 
         return sendResponse($excuses, 'Excuses retrieved successfully.');
     }
 
     public function create()
     {
-        $departments = Department::all();
-        return sendResponse($departments, 'Departments retrieved successfully.');
+        $data['departments'] = Department::get();
+        $data['materials'] = $this->materials;
+
+        return sendResponse($data, 'data retrieved successfully.');
     }
 
-    public function show(Excuse $excuse)
+    public function show($excuse_id)
     {
-        $excuse->load('images');
+        $excuse = Excuse::with('student', 'images')
+            ->where('student_id', Auth::user()->id)
+            ->find($excuse_id);
+
+        if (!$excuse) {
+            return sendError('Excuse not found.');
+        }
+
         return sendResponse($excuse, 'Excuse details retrieved successfully.');
     }
 
@@ -75,7 +90,6 @@ class ExcuseController extends Controller
             return sendError('An error occurred while creating the excuse.', $e->getMessage(), 500);
         }
     }
-
 
     public function edit(Request $request, $id)
     {

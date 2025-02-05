@@ -17,8 +17,9 @@ Route::middleware('auth:sanctum')
     ->prefix('excuses')
     ->group(function () {
         Route::get('/', 'studentExcuses');
+        Route::get('/create', 'create');
         Route::post('/', 'store');
-        Route::get('/{excuse}', 'show');
+        Route::get('/{excuse_id}', 'show');
         Route::put('/{id}', 'update');
         Route::delete('/{excuse}', 'destroy');
         Route::get('/{id}/edit', 'edit');
