@@ -28,6 +28,7 @@ if (!function_exists('sendError')) {
 function displayRole($roleName){
     return ucwords(str_replace('-', ' ', strtolower($roleName)));
 }
+
 function displayPermission($permissionName){
     return strtolower(str_replace('_', ' ', $permissionName));
 }

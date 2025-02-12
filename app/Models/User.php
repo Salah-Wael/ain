@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Task;
 use App\Models\Excuse;
 use App\Models\Subject;
 use App\Models\Department;
+use App\Models\TaskAnswer;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -41,6 +43,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function excuses()
     {
         return $this->hasMany(Excuse::class);
+    }
+
+    public function taskAnswers()
+    {
+        return $this->hasMany(TaskAnswer::class, 'student_id');
     }
 
     /**

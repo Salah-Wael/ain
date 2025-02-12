@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedMediumInteger('id')->autoIncrement();
             $table->string('name', 255)->nullable();
             $table->timestamp('deadline');
+            
             $table->unsignedMediumInteger('lecture_id');
             $table->foreign('lecture_id')->references('id')->on('lectures')->onDelete('cascade');
 

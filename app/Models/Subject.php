@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Doctor;
+use App\Models\Lecture;
 use App\Models\Semester;
 use App\Models\ClassRoom;
 use App\Models\Department;
@@ -48,5 +49,10 @@ class Subject extends Model
     public function students()
     {
         return $this->belongsToMany(User::class, 'student_subject', 'student_id', 'subject_id');
+    }
+
+    public function lectures()
+    {
+        return $this->hasMany(Lecture::class);
     }
 }

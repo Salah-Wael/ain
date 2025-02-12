@@ -228,6 +228,20 @@
                     </a>
                 </li>
                 @endrole
+                @role('Doctor', 'doctor')
+                <li class="menu-item">
+                    <a href="{{ route('subjects.doctor') }}" class="menu-link">
+                        <div data-i18n="Connections">My Subjects</div>
+                    </a>
+                </li>
+                @endrole
+                @role('Student', 'web')
+                <li class="menu-item">
+                    <a href="{{ route('subjects.student') }}" class="menu-link">
+                        <div data-i18n="Connections">My Subjects</div>
+                    </a>
+                </li>
+                @endrole
             </ul>
         </li>
 

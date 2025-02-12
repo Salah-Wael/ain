@@ -2,9 +2,12 @@
 
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ExcuseController;
+use App\Http\Controllers\LectureController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TaskAnswerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 require __DIR__ . '/student.php';
@@ -23,15 +26,42 @@ Route::controller(ExcuseController::class)->name('excuses.')->group(function () 
     Route::delete('excuses/{id}','destroy')->name('destroy');
 });
 
+            // middleware(['role:Super-Admin|Admin,admin'])
+            // middleware('role:Doctor,doctor')
+            // middleware('role:Student')
+
 Route::controller(SubjectController::class)->group(function () {
     Route::get('subjects', 'index')->name('subjects.index');
-    Route::get('subject/create', 'create')->name('subjects.create');
-    Route::post('subject', 'store')->name('subjects.store');
+    Route::get('doctor/subjects', 'doctorSubject')->middleware('role:Doctor,doctor')->name('subjects.doctor');
+    Route::get('student/subjects', 'studentSubject')->middleware('role:Student')->name('subjects.student');
+    Route::get('subject/create', 'create')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.create');
+    Route::post('subject', 'store')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.store');
     Route::get('subject/{subject}', 'show')->name('subjects.show');
-    Route::get('subject/{subject}/edit', 'edit')->name('subjects.edit');
-    Route::put('subject/{subject}', 'update')->name('subjects.update');
-    Route::delete('subject/{subject}', 'destroy')->name('subjects.destroy');
+    Route::get('subject/{subject}/edit', 'edit')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.edit');
+    Route::put('subject/{subject}', 'update')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.update');
+    Route::delete('subject/{subject}', 'destroy')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.destroy');
 });
+
+Route::controller(LectureController::class)->group(function () {
+    Route::post('/lectures', 'store')->name('lectures.store');
+    Route::get('/lectures/create', 'create')->name('lectures.create'); // Changed to GET
+    Route::get('/lectures/{lecture}/edit', 'edit')->name('lectures.edit'); // Corrected to include {lecture}
+    Route::delete('/lectures/{lecture}', 'destroy')->name('lectures.destroy');
+});
+
+Route::controller(TaskController::class)->group(function () {
+    Route::get('/tasks', 'index')->name('tasks.index');
+    Route::post('/task', 'store')->name('tasks.store');
+    Route::get('/tasks/{task}/edit', 'edit')->name('tasks.edit');
+    Route::put('/tasks/{task}', 'update')->name('tasks.update');
+    Route::delete('/tasks/{task}', 'destroy')->name('tasks.destroy');
+});
+
+Route::controller(TaskAnswerController::class)->name('task-answers.')->group(function () {
+    Route::post('/taskddd-answers', 'store')->middleware('role:Student')->name('store');
+});
+
+
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -2,17 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AcademicYear;
-use App\Models\Department;
+use App\Models\User;
+use App\Models\Doctor;
 use App\Models\Subject;
 use App\Models\Semester;
+use App\Models\Department;
+use App\Models\AcademicYear;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
+
+
     public function index()
     {
         $subjects = Subject::with(['department', 'semester', 'academicYear'])->get();
+        return view('subjects.index', compact('subjects'));
+    }
+    public function doctorSubject()
+    {
+        $doctor = Doctor::with([
+            'subjects.department',
+            'subjects.semester',
+            'subjects.academicYear'
+        ])
+            ->find(auth()->guard('doctor')->id());
+
+        $subjects = $doctor->subjects;
+
+        return view('subjects.index', compact('subjects'));
+    }
+
+    public function studentSubject()
+    {
+        $student = User::with([
+            'subjects.department',
+            'subjects.semester',
+            'subjects.academicYear',
+            'subjects.doctors',
+        ])
+            ->find(Auth::user()->id);
+
+        $subjects = $student->subjects;
+
         return view('subjects.index', compact('subjects'));
     }
 
@@ -26,10 +59,16 @@ class SubjectController extends Controller
 
     public function show(Subject $subject)
     {
-        $subject->load(['department', 'semester']); // Eager load related models
+        $subject->load([
+            'department',
+            'semester',
+            'academicYear',
+            'doctors',
+            'lectures.tasks.answers.student',
+        ]); // Eager load related models
+
         return view('subjects.show', compact('subject'));
     }
-
 
     public function store(Request $request)
     {

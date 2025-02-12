@@ -10,7 +10,7 @@ class StudentSubject extends Pivot
 {
     use HasFactory;
 
-    protected $guarded = [];
-
+    protected $incrementing = true;
+    protected $primaryKey = 'id';
     protected $table = 'student_subject';
 }

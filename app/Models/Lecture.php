@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Task;
+use App\Models\Subject;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lecture extends Model
 {
@@ -13,4 +15,13 @@ class Lecture extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
+    public function tasks(){
+        return $this->hasMany(related: Task::class);
+    }
 }

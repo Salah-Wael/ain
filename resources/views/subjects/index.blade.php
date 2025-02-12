@@ -19,9 +19,7 @@
                 <th>Department</th>
                 <th>Semester</th>
                 <th>Academic Year</th>
-                @role('Super-Admin', 'admin')
-                    <th>Actions</th>
-                @endrole
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,20 +27,24 @@
                 <tr>
                     <td>{{ $subject->name }}</td>
                     <td>{{ $subject->code }}</td>
-                    <td>{{ $subject->department->name }}</td>
-                    <td>{{ $subject->semester->name }}</td>
-                    <td>{{ $subject->academicYear->year }}</td>
-                    @role('Super-Admin', 'admin')
+                    <td>{{ $subject->department->name ?? 'N/A' }}</td>
+                    <td>{{ $subject->semester->name ?? 'N/A' }}</td>
+                    <td>{{ $subject->academicYear->year ?? 'N/A' }}</td>
                     <td>
-                        <a href="{{ route('subjects.edit', $subject->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('subjects.destroy', $subject->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this subject?')">Delete</button>
-                        </form>
+                        <a href="{{ route('subjects.show', $subject->id) }}" class="btn btn-warning btn-sm">Show</a>
+
+                        {{-- Super-Admin & Admin Actions --}}
+                        @hasanyrole('Super-Admin|Admin', 'admin')
+                            <a href="{{ route('subjects.edit', $subject->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('subjects.destroy', $subject->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this subject?')">Delete</button>
+                            </form>
+                        @endhasanyrole
                     </td>
-                    @endrole
                 </tr>
+
             @endforeach
         </tbody>
     </table>
