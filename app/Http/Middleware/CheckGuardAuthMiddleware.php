@@ -14,10 +14,25 @@ class CheckGuardAuthMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $guard = null): Response
+    public function handle(Request $request, Closure $next, $guard = 'web'): Response
     {
-        if ($guard && !Auth::guard($guard)->check()) {
-            return abort(403);
+        if (!Auth::guard($guard)->check()) {
+            switch ($guard) {
+                case 'admin':
+                    return redirect()->route('back.login');
+                    break;
+                case 'doctor':
+                    return redirect()->route('doctor.login');
+                    break;
+                case 'head':
+                    return redirect()->route('head.login');
+                    break;
+                case 'web':
+                    return redirect()->route('login');
+                    break;
+                default:
+                    return redirect()->route('login');
+            }
         }
         return $next($request);
     }

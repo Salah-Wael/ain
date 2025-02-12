@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
 class AdminController extends Controller implements HasMiddleware
@@ -16,8 +17,7 @@ class AdminController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            // new Middleware('', only: ['index']),
-            // new Middleware('', except: ['store']),
+            new Middleware('role:Super-Admin,admin'),
         ];
     }
 

@@ -11,11 +11,11 @@
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+            <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" id="password" class="form-control" required>
+            <input type="password" name="password" id="password" class="form-control">
         </div>
         <div class="mb-3">
             <label for="department_id" class="form-label">Department</label>

@@ -14,7 +14,7 @@ use App\Http\Controllers\Doctor\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Doctor\Auth\EmailVerificationNotificationController;
 
 Route::prefix('/doctor')->name('doctor.')->group(function () {
-    Route::get('home', DoctorHomeController::class)->name('index');
+    Route::get('home', DoctorHomeController::class)->middleware('guardauth:doctor')->name('index');
 });
 
 Route::prefix('/doctor')->name('doctor.')->middleware('guest')->group(function () {

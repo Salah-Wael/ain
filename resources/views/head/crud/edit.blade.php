@@ -12,7 +12,7 @@
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $headOfDepartment->email) }}" required>
+            <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $headOfDepartment->email) }}">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

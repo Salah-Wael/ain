@@ -27,12 +27,16 @@ class DoctorController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:doctors,email',
-            'password' => 'required|string|min:6',
+            'email' => 'nullable|email|unique:doctors,email',
+            'password' => 'nullable|string|min:6',
             'department_id' => 'required|exists:departments,id',
             'subjects' => 'required|array',
             'subjects.*' => 'exists:subjects,id',
         ]);
+
+        if (!$request->filled('password')) {
+            $request->merge(['password' => 123456789]);
+        }
 
         $doctor = Doctor::create([
             'name' => $request->name,
@@ -40,6 +44,8 @@ class DoctorController extends Controller
             'password' => bcrypt($request->password),
             'department_id' => $request->department_id,
         ]);
+
+        $doctor->assignRole('Doctor');
 
         if(isset($request->subjects)){
             $doctor->subjects()->attach($request->subjects);

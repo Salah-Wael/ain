@@ -53,12 +53,12 @@
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
+
+                <div class="mb-3 d-flex justify-content-between">
+                    <a href="{{ route('back.login') }}" class="btn btn-primary w-100 mx-1">Admin Login</a>
+                    <a href="{{ route('head.login') }}" class="btn btn-primary w-100 mx-1">Head Login</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary w-100 mx-1">Student Login</a>
+                </div>
               </form>
 
-              {{-- <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="{{ route('doctor.register') }}">
-                  <span>Create an account</span>
-                </a>
-              </p> --}}
 @endsection

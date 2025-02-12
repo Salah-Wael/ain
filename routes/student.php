@@ -42,7 +42,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::get('/', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth');
+Route::get('/', [AuthenticatedSessionController::class, 'destroy'])->middleware('guardauth:web');
 
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('/student')->name('front.')->group(function () {
-    Route::get('/user', FrontHomeController::class)->middleware('auth')->name('index');
+    Route::get('/user', FrontHomeController::class)->middleware('auth:web')->name('index');
 });
 
 Route::resource('students', StudentController::class);

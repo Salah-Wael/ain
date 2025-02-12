@@ -14,7 +14,7 @@ use App\Http\Controllers\Head\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Head\Auth\EmailVerificationNotificationController;
 
 Route::prefix('/head-of-department')->name('head.')->group(function () {
-    Route::get('home', HeadHomeController::class)->name('index');
+    Route::get('home', HeadHomeController::class)->middleware('guardauth:head')->name('index');
 });
 
 Route::prefix('/head-of-department')->name('head.')->middleware('guest')->group(function () {

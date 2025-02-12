@@ -26,17 +26,23 @@ class HeadOfDepartmentController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:head_of_departments',
-            'password' => 'required|string|min:8',
+            'email' => 'nullable|email|unique:head_of_departments',
+            'password' => 'nullable|string|min:8',
             'department_id' => 'required|exists:departments,id',
         ]);
 
-        HeadOfDepartment::create([
+        if (!$request->filled('password')) {
+            $request->merge(['password' => 123456789]);
+        }
+
+        $head = HeadOfDepartment::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'department_id' => $request->department_id,
         ]);
+
+        $head->assignRole('Head-Of-Department');
 
         return redirect()->route('head_of_departments.index')->with('success', 'Head of Department added successfully.');
     }

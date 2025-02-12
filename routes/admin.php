@@ -58,7 +58,7 @@ Route::post('/back/logout', [AuthenticatedSessionController::class, 'destroy'])
 
 Route::prefix('/back')->name('back.')->group(function () {
 
-    Route::get('/admin', BackHomeController::class)->name('index');
+    Route::get('/admin', BackHomeController::class)->middleware('guardauth:admin')->name('index');
     Route::resource('admins', AdminController::class);
 
     Route::resource('permissions', PermissionController::class)
