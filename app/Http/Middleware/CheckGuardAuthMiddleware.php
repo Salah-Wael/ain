@@ -30,6 +30,9 @@ class CheckGuardAuthMiddleware
                 case 'web':
                     return redirect()->route('login');
                     break;
+                case 'api':
+                    return redirect('api/login');
+                    break;
                 default:
                     return redirect()->route('login');
             }

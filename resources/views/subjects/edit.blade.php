@@ -6,6 +6,7 @@
     <form action="{{ route('subjects.update', $subject->id) }}" method="POST">
         @csrf
         @method('PUT')
+
         <div class="mb-3">
             <label for="name" class="form-label">Subject Name</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $subject->name) }}" required>
@@ -13,6 +14,7 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+
         <div class="mb-3">
             <label for="code" class="form-label">Subject Code</label>
             <input type="text" name="code" id="code" class="form-control" value="{{ old('code', $subject->code) }}" required>
@@ -20,6 +22,7 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+
         <div class="mb-3">
             <label for="department_id" class="form-label">Department</label>
             <select name="department_id" id="department_id" class="form-select" required>
@@ -34,34 +37,55 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+
         <div class="mb-3">
-            <label for="semester_id" class="form-label">Semester</label>
-            <select name="semester_id" id="semester_id" class="form-select" required>
-                <option value="">Select Semester</option>
+            <label class="form-label">Semesters</label>
+            <div class="d-flex flex-wrap">
                 @foreach($semesters as $semester)
-                    <option value="{{ $semester->id }}" {{ old('semester_id', $subject->semester_id) == $semester->id ? 'selected' : '' }}>
-                        {{ $semester->name }}
-                    </option>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" name="semester_id[]" value="{{ $semester->id }}"
+                            {{ in_array($semester->id, old('semester_id', $subject->semesters->pluck('id')->toArray())) ? 'checked' : '' }}>
+                        <label class="form-check-label">{{ $semester->name }}</label>
+                    </div>
                 @endforeach
-            </select>
+            </div>
             @error('semester_id')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+
         <div class="mb-3">
-            <label for="academic_year_id" class="form-label">Academic Year</label>
-            <select name="academic_year_id" id="academic_year_id" class="form-select" required>
-                <option value="">Select Academic Year</option>
+            <label class="form-label">Academic Years</label>
+            <div class="d-flex flex-wrap">
                 @foreach($academicYears as $academicYear)
-                    <option value="{{ $academicYear->id }}" {{ old('academic_year_id', $subject->academic_year_id) == $academicYear->id ? 'selected' : '' }}>
-                        {{ $academicYear->year }}
-                    </option>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" name="academic_year_id[]" value="{{ $academicYear->id }}"
+                            {{ in_array($academicYear->id, old('academic_year_id', $subject->academicYears->pluck('id')->toArray())) ? 'checked' : '' }}>
+                        <label class="form-check-label">{{ $academicYear->year }}</label>
+                    </div>
                 @endforeach
-            </select>
+            </div>
             @error('academic_year_id')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+
+        <div class="mb-3">
+            <label class="form-label">Doctors</label>
+            <div class="d-flex flex-wrap">
+                @foreach($doctors as $doctor)
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" name="doctor_id[]" value="{{ $doctor->id }}"
+                            {{ in_array($doctor->id, old('doctor_id', $subject->doctors->pluck('id')->toArray())) ? 'checked' : '' }}>
+                        <label class="form-check-label">{{ $doctor->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+            @error('doctor_id')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+
         <button type="submit" class="btn btn-primary">Update Subject</button>
     </form>
 </div>

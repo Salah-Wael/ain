@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_subject', function (Blueprint $table) {
+        Schema::create('semester_subject', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+
+            $table->unsignedTinyInteger('semester_id');
+            $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');
 
             $table->unsignedSmallInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
-
-            $table->enum('status', ['pending', 'pass', 'fail'])->default('pending');
-
+            
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('student_subject');
+        Schema::dropIfExists('semester_subject');
     }
 };

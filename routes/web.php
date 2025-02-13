@@ -31,9 +31,11 @@ Route::controller(ExcuseController::class)->name('excuses.')->group(function () 
             // middleware('role:Student')
 
 Route::controller(SubjectController::class)->group(function () {
-    Route::get('subjects', 'index')->name('subjects.index');
+    Route::get('subjects', 'index')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.index');
     Route::get('doctor/subjects', 'doctorSubject')->middleware('role:Doctor,doctor')->name('subjects.doctor');
     Route::get('student/subjects', 'studentSubject')->middleware('role:Student')->name('subjects.student');
+    Route::post('subjects/student/register', 'storeStudentRegisterSubjects')->middleware('role:Student')->name('subjects.student.register');
+    Route::get('get/subjects/student/register', 'subjectsStudentMayRegister')->middleware('role:Student')->name('subjects.student.may.register');
     Route::get('subject/create', 'create')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.create');
     Route::post('subject', 'store')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.store');
     Route::get('subject/{subject}', 'show')->name('subjects.show');

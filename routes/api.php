@@ -26,8 +26,8 @@ Route::middleware('auth:sanctum')
         Route::get('/{id}/edit', 'edit');
     });
 
-Route::middleware('auth:sanctum')
-    ->controller(TaskAnswerController::class)
+    Route::controller(TaskAnswerController::class)
+    ->middleware('auth:sanctum')
     ->group(function () {
         Route::get('/get-student-tasks', 'getStudentAnswers');
         Route::post('/task-answer', 'store');

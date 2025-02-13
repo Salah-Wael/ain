@@ -216,12 +216,12 @@
                 <div data-i18n="Account Settings">Subjects</div>
             </a>
             <ul class="menu-sub">
+                @role('Super-Admin', 'admin')
                 <li class="menu-item">
                     <a href="{{ route('subjects.index') }}" class="menu-link">
                         <div data-i18n="Connections">All</div>
                     </a>
                 </li>
-                @role('Super-Admin', 'admin')
                 <li class="menu-item">
                     <a href="{{ route('subjects.create') }}" class="menu-link">
                         <div data-i18n="Connections">Create</div>
@@ -239,6 +239,11 @@
                 <li class="menu-item">
                     <a href="{{ route('subjects.student') }}" class="menu-link">
                         <div data-i18n="Connections">My Subjects</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('subjects.student.may.register') }}" class="menu-link">
+                        <div data-i18n="Connections">Register</div>
                     </a>
                 </li>
                 @endrole

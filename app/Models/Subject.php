@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Doctor;
 use App\Models\Lecture;
@@ -10,6 +11,7 @@ use App\Models\ClassRoom;
 use App\Models\Department;
 use App\Models\AcademicYear;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subject extends Model
@@ -31,19 +33,31 @@ class Subject extends Model
         return $this->belongsToMany(ClassRoom::class)->withPivot(['from', 'to']);
     }
 
-    public function semester()
+    public function semesters()
     {
-        return $this->belongsTo(Semester::class);
+        return $this->belongsToMany(Semester::class, 'semester_subject', 'subject_id', 'semester_id');
     }
+    // public function semester()
+    // {
+    //     return $this->belongsTo(Semester::class);
+    // }
 
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
     }
 
-    public function academicYear()
+    // Scope to filter subjects by the current academic year
+    public function scopeCurrentAcademicYear(Builder $query)
     {
-        return $this->belongsTo(AcademicYear::class);
+        $currentYear = Carbon::now()->year;
+        return $query->whereHas('academicYears', function ($query) use ($currentYear) {
+            $query->where('year', 'LIKE', "%$currentYear%");
+        });
+    }
+    public function academicYears()
+    {
+        return $this->belongsToMany(AcademicYear::class, 'academic_year_subject','subject_id', 'academic_year_id');
     }
 
     public function students()

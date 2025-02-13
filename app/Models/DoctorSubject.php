@@ -10,8 +10,8 @@ class DoctorSubject extends Pivot
 {
     use HasFactory;
 
-    protected $incrementing = true;
-    protected $primaryKey = 'id';
+    public $incrementing = true;
+    public $primaryKey = 'id';
 
-    protected $table = 'doctor_subject';
+    public $table = 'doctor_subject';
 }

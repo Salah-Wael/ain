@@ -17,16 +17,10 @@ return new class extends Migration
             $table->string('code');
             $table->enum('hours', [1, 2, 3, 4, 5, 6])->default(3);
 
-            $table->unsignedTinyInteger('academic_year_id');
-            $table->foreign('academic_year_id')->references('id')->on('academic_years')->onDelete('cascade');
+            $table->unsignedTinyInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
 
-            $table->unsignedTinyInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
-
-            $table->unsignedTinyInteger('semester_id');
-            $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');
-
-            $table->unique(['name', 'academic_year_id', 'semester_id']);
+            $table->unique(['name', 'code']);
 
             $table->timestamps();
         });

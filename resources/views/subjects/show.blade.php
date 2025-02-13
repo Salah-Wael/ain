@@ -4,10 +4,11 @@
 <div class="container">
     <h2>{{ $subject->name }}</h2>
     <p><strong>Code:</strong> {{ $subject->code }}</p>
-    <p><strong>Department:</strong> {{ $subject->department->name }}</p>
-    <p><strong>Semester:</strong> {{ $subject->semester->name }}</p>
+    <p><strong>Department:</strong> {{ $subject->department->name ?? 'N/A' }}</p>
+    <p><strong>Semesters:</strong> {{ $subject->semesters->pluck('name')->join(', ') ?: 'N/A' }}</p>
     <p><strong>Hours:</strong> {{ $subject->hours }}</p>
-    <p><strong>Academic Year:</strong> {{ $subject->academicYear->year }}</p>
+    <p><strong>Academic Years:</strong> {{ $subject->academicYears->pluck('year')->join(', ') ?: 'N/A' }}</p>
+    <p><strong>Doctors:</strong> {{ $subject->doctors->pluck('name')->join(', ') ?: 'N/A' }}</p>
 
     <a href="{{ route('subjects.index') }}" class="btn btn-secondary">Back to List</a>
 
@@ -33,7 +34,7 @@
 
                     <div>
                         @role('Doctor', 'doctor')
-                            <button class="btn btn-sm btn-success add-task-btn" data-lecture-id="{{ $lecture->id }}">add Task</button>
+                            <button class="btn btn-sm btn-success add-task-btn" data-lecture-id="{{ $lecture->id }}">Add Task</button>
                             <a href="{{ route('lectures.edit', $lecture->id) }}" class="btn btn-sm btn-warning">Edit</a>
                             <form action="{{ route('lectures.destroy', $lecture->id) }}" method="POST" class="d-inline">
                                 @csrf
@@ -44,7 +45,7 @@
                     </div>
                 </li>
 
-                <!-- Hidden Task Form (Initially Hidden) -->
+                <!-- Hidden Task Form -->
                 <li class="list-group-item task-form d-none" id="task-form-{{ $lecture->id }}">
                     <form action="{{ route('tasks.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -55,12 +56,11 @@
                     </form>
                 </li>
 
-                <!-- Display Tasks Inside Each Lecture -->
+                <!-- Display Tasks -->
                 <div class="d-flex flex-wrap gap-3">
                     @foreach ($lecture->tasks as $task)
-
                         @php
-                            $filePath = asset('lectures-tasks/' . $task->name); // Adjust based on storage
+                            $filePath = asset('lectures-tasks/' . $task->name);
                             $fileExtension = pathinfo($task->name, PATHINFO_EXTENSION);
                         @endphp
 
@@ -87,12 +87,11 @@
 
                             <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
                                 @role('Student', 'web')
-                                    <!-- Upload Answer Section -->
-                                    <form action="{{  route('task-answers.store') }}" method="POST" enctype="multipart/form-data" class="d-flex gap-2">
+                                    <!-- Upload Answer -->
+                                    <form action="{{ route('task-answers.store') }}" method="POST" enctype="multipart/form-data" class="d-flex gap-2">
                                         @csrf
                                         <input type="hidden" name="task_id" value="{{ $task->id }}">
 
-                                        <!-- Custom File Input -->
                                         <div class="input-group">
                                             <input type="file" name="answer_file" class="form-control form-control-sm" required>
                                             <button type="submit" class="btn btn-success btn-sm">Upload</button>
@@ -100,11 +99,9 @@
                                     </form>
                                 @endrole
 
-                                <!-- Download Button -->
                                 <a href="{{ $filePath }}" download class="btn btn-sm btn-primary">Download</a>
 
                                 @role('Doctor', 'doctor')
-                                    <!-- Delete Task Button -->
                                     <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
@@ -114,7 +111,6 @@
                             </div>
 
                         </div>
-
                     @endforeach
                 </div>
             @endforeach
@@ -126,17 +122,11 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Show the task form when clicking "+"
         document.querySelectorAll('.add-task-btn').forEach(button => {
             button.addEventListener('click', function () {
                 let lectureId = this.getAttribute('data-lecture-id');
                 let taskForm = document.getElementById('task-form-' + lectureId);
-
-                if (taskForm.classList.contains('d-none')) {
-                    taskForm.classList.remove('d-none');
-                } else {
-                    taskForm.classList.add('d-none');
-                }
+                taskForm.classList.toggle('d-none');
             });
         });
     });

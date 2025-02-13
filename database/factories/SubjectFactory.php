@@ -30,9 +30,7 @@ class SubjectFactory extends Factory
         return [
             'name' => $name,
             'code' => $code,
-            'semester_id' => $this->faker->numberBetween(1, 3), // Assuming 8 semesters
             'department_id' => Department::inRandomOrder()->first()->id,
-            'academic_year_id' => AcademicYear::inRandomOrder()->first()->id,
             'hours' => $this->faker->randomElement([1, 2, 3, 4, 5, 6]),
             'created_at' => now(),
             'updated_at' => now(),
