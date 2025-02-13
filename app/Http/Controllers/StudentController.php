@@ -37,7 +37,7 @@ class StudentController extends Controller
             'department_id' => $request->department_id,
         ]);
 
-        return redirect()->route('students.index')->with('success', 'Student created successfully.');
+        return redirect()->route('students.index')->with('success', __('messages.student_created'));
     }
 
     public function edit(User $student)
@@ -62,12 +62,12 @@ class StudentController extends Controller
             'department_id' => $request->department_id,
         ]);
 
-        return redirect()->route('students.index')->with('success', 'Student updated successfully.');
+        return redirect()->route('students.index')->with('success', __('messages.student_updated'));
     }
 
     public function destroy(User $student)
     {
         $student->delete();
-        return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
+        return redirect()->route('students.index')->with('success', __('messages.student_deleted'));
     }
 }

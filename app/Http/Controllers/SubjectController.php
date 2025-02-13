@@ -76,7 +76,6 @@ class SubjectController extends Controller
 
     public function storeStudentRegisterSubjects(Request $request)
     {
-        // dd($request->all());//Debug
         $request->validate([
             'subject_id' => 'required|array',
             'subject_id.*' => 'exists:subjects,id',
@@ -85,7 +84,7 @@ class SubjectController extends Controller
         $student = User::find(Auth::user()->id);
         $student->subjects()->sync($request->subject_id);
 
-        return redirect()->route('subjects.student')->with('success', 'Subjects registered successfully.');
+        return redirect()->route('subjects.student')->with('success', __('messages.subjects_registered_successfully'));
     }
 
     public function create()
@@ -162,7 +161,7 @@ class SubjectController extends Controller
             $subject->doctors()->sync($request->doctor_id);
         }
 
-        return redirect()->route('subjects.index')->with('success', 'Subject created successfully.');
+        return redirect()->route('subjects.index')->with('success', __('messages.subject_created_successfully'));
     }
 
 
@@ -213,7 +212,7 @@ class SubjectController extends Controller
         $subject->academicYears()->sync($request->academic_year_id);
         $subject->doctors()->sync($request->doctor_id);
 
-        return redirect()->route('subjects.index')->with('success', 'Subject updated successfully.');
+        return redirect()->route('subjects.index')->with('success', __('messages.subject_updated_successfully'));
     }
 
 
@@ -222,6 +221,6 @@ class SubjectController extends Controller
     {
         $subject->delete();
 
-        return redirect()->route('subjects.index')->with('success', 'Subject deleted successfully.');
+        return redirect()->route('subjects.index')->with('success', __('messages.subject_deleted_successfully'));
     }
 }

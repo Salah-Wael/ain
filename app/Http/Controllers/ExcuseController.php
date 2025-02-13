@@ -77,7 +77,7 @@ class ExcuseController extends Controller
         }
 
         // Redirect with a success message
-        return redirect()->route('excuses.student')->with('success', 'Excuse created successfully.');
+        return redirect()->route('excuses.student')->with('success', __('messages.excuse_created'));
 
     }
 
@@ -100,7 +100,7 @@ class ExcuseController extends Controller
         ]);
 
         $excuse = Excuse::findOrFail($id);
-        
+
         $department = Department::where('name', $request->input('department'))->first();
 
         $excuse->update([
@@ -122,7 +122,7 @@ class ExcuseController extends Controller
                 ]);
             }
         }
-        return redirect()->route('excuses.student')->with('success', 'Excuse updated successfully.');
+        return redirect()->route('excuses.student')->with('success', __('messages.excuse_updated'));
     }
 
     public function updateStatus(Request $request, $id)
@@ -135,12 +135,12 @@ class ExcuseController extends Controller
 
         $excuse->update(['status' => $request->status]);
 
-        return redirect()->route('excuses.index')->with('success', 'Excuse Approved successfully.');
+        return redirect()->route('excuses.index')->with('success', __('messages.excuse_approved'));
     }
 
     public function destroy(Excuse $excuse)
     {
         $excuse->delete();
-        return redirect()->route('excuses.index')->with('success', 'Excuse deleted successfully.');
+        return redirect()->route('excuses.index')->with('success', __('messages.excuse_deleted'));
     }
 }

@@ -33,7 +33,7 @@ class StudentSubjectController extends Controller
         $student = User::findOrFail($request->student_id);
         $student->subjects()->sync($request->subject_ids);
 
-        return redirect()->route('student_subjects.index')->with('success', 'Subjects assigned successfully.');
+        return redirect()->route('student_subjects.index')->with('success', __('messages.subjects_assigned'));
     }
 
     public function edit(User $student)
@@ -53,7 +53,7 @@ class StudentSubjectController extends Controller
 
         $student->subjects()->sync($request->subject_ids);
 
-        return redirect()->route('student_subjects.index')->with('success', 'Subjects updated successfully.');
+        return redirect()->route('student_subjects.index')->with('success', __('messages.subjects_updated'));
     }
 }
 

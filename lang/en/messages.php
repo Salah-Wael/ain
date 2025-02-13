@@ -3,6 +3,7 @@
 return [
     'notification_sent' => 'Notifications sent successfully.',
     'not_found' => 'No comments found.',
+    'try_again' => 'Try again later please.',
     'unauthorized' => 'Unauthorized action.',
     'validation_error' => 'Validation error occurred.',
 
@@ -48,9 +49,36 @@ return [
     'logout_success' => 'Logout successful.',
     'password_updated_successfully' => 'Password updated successfully.',
     'current_password_mismatch' => 'Current password does not match.',
-    
+
     'profile_fetched' => 'Profile fetched successfully.',
     'profile_updated' => 'Profile updated successfully.',
     'profile_deleted' => 'Profile deleted successfully.',
     'something_went_wrong' => 'Something went wrong.',
+
+    'excuse_created' => 'Excuse created successfully.',
+    'excuse_updated' => 'Excuse updated successfully.',
+    'excuse_approved' => 'Excuse approved successfully.',
+    'excuse_deleted' => 'Excuse deleted successfully.',
+
+    'lecture_created' => 'Lecture created successfully.',
+    'lecture_deleted' => 'Lecture deleted successfully.',
+
+    'student_created' => 'Student created successfully.',
+    'student_updated' => 'Student updated successfully.',
+    'student_deleted' => 'Student deleted successfully.',
+
+    'subjects_assigned' => 'Subjects assigned successfully.',
+    'subjects_updated' => 'Subjects updated successfully.',
+    'subjects_registered_successfully' => 'Subjects registered successfully.',
+    'subject_created_successfully' => 'Subject created successfully.',
+    'subject_updated_successfully' => 'Subject updated successfully.',
+    'subject_deleted_successfully' => 'Subject deleted successfully.',
+
+    'error_deleting_answer' => 'Error deleting the previous Answer.',
+    'answer_uploaded' => 'Answer uploaded successfully.',
+
+    'task_created' => 'Task created successfully.',
+    'task_deleted' => 'Task deleted successfully.',
+    'task_delete_error' => 'Error deleting task.',
+
 ];

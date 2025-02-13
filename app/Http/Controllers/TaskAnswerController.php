@@ -33,7 +33,7 @@ class TaskAnswerController extends Controller
             if ($this->deleteFile('task-answers/' . $answer->path)) {
                 $answer->delete();
             } else {
-                return redirect()->back()->with(['error' => 'Error deleting the previous Answer.']);
+                return redirect()->back()->with(['error' => __('messages.error_deleting_answer')]);
             }
         }
 
@@ -47,8 +47,8 @@ class TaskAnswerController extends Controller
                 'student_id' => Auth::user()->id,
                 'path' => $path,
             ]);
-            return redirect()->back()->with(['success' => 'Answer uploaded successfully.']);
+            return redirect()->back()->with(['success' => __('messages.answer_uploaded')]);
         }
-        return redirect()->back()->with(['error' => 'Try again later please.']);
+        return redirect()->back()->with(['error' => __('messages.try_again')]);
     }
 }

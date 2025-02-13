@@ -24,12 +24,12 @@ class LectureController extends Controller
             'subject_id' => $request->input('subject_id'),
         ]);
 
-        return redirect()->back()->with(['success' => 'Lecture created successfully.']);
+        return redirect()->back()->with(['success' => __('messages.lecture_created')]);
     }
 
     public function destroy($lecture_id)
     {
         Lecture::findOrFail($lecture_id)->delete();
-        return redirect()->back()->with(['success' => 'Lecture deleted successfully.']);
+        return redirect()->back()->with(['success' => __('messages.lecture_deleted')]);
     }
 }

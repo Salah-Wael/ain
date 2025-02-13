@@ -40,9 +40,9 @@ class TaskController extends Controller
                 'lecture_id' => $validated['lecture_id'],
             ]);
 
-            return redirect()->back()->with(['success' => 'Task created successfully.']);
+            return redirect()->back()->with(['success' => __('messages.task_created')]);
         }
-        return redirect()->back()->with(['error' => 'Try again later please.']);
+        return redirect()->back()->with(['error' => __('messages.try_again')]);
     }
 
     /**
@@ -67,10 +67,10 @@ class TaskController extends Controller
     {
         if($this->deleteFile('lectures-tasks/'. $task->name)){
             $task->delete();
-            return redirect()->back()->with(['success' => 'Task deleted successfully.']);
+            return redirect()->back()->with(['success' => __('messages.task_deleted')]);
         }
         else{
-            return redirect()->back()->with(['error' => 'Error deleting task.']);
+            return redirect()->back()->with(['error' => __('messages.task_delete_error')]);
         }
     }
 }
