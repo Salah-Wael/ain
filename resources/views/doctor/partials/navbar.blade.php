@@ -20,6 +20,33 @@
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <!-- Language Switcher -->
+            <li class="nav-item dropdown me-3">
+                <a class="btn btn-sm {{ app()->getLocale() == 'en' ? 'btn-primary' : 'btn-outline-primary' }} dropdown-toggle"
+                href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ app()->getLocale() == 'en' ? 'English' : 'العربية' }}
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                    <li>
+                        <form action="{{ route('changeLang', 'en') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                                English
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <form action="{{ route('changeLang', 'ar') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item {{ app()->getLocale() == 'ar' ? 'active' : '' }}">
+                                العربية
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            <!-- / Language Switcher -->
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">

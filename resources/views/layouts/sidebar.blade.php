@@ -3,15 +3,15 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         @if (Auth::guard('admin')->check())
-            <a href="{{ route('back.index') }}" class="app-brand-link">admin
+            <a href="{{ route('back.index') }}" class="app-brand-link">{{ __('messages.admin') }}
         @elseif(Auth::guard('web')->check())
-            <a href="{{ route('front.index') }}" class="app-brand-link">student
+            <a href="{{ route('front.index') }}" class="app-brand-link">{{ __('messages.student') }}
         @elseif(Auth::guard('head')->check())
-            <a href="{{ route('head.index') }}" class="app-brand-link">head of department
+            <a href="{{ route('head.index') }}" class="app-brand-link">{{ __('messages.head_of_department') }}
         @elseif(Auth::guard('doctor')->check())
-            <a href="{{ route('doctor.index') }}" class="app-brand-link">doctor
+            <a href="{{ route('doctor.index') }}" class="app-brand-link">{{ __('messages.doctor') }}
         @else
-            <a href="{{ route('front.index') }}" class="app-brand-link">student
+            <a href="{{ route('front.index') }}" class="app-brand-link">{{ __('messages.student') }}
         @endif
         <span class="app-brand-logo demo">
             <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@
                     <a href="{{ route('front.index') }}" class="menu-link">
                 @endif
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">{{ __('messages.dashboard') }}</div>
             </a>
         </li>
         @role('Super-Admin', 'admin')
@@ -94,17 +94,17 @@
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                    <div data-i18n="Account Settings">Admins</div>
+                    <div data-i18n="Account Settings">{{ __('messages.admins') }}</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
                         <a href="{{ route('back.admins.index') }}" class="menu-link">
-                            <div data-i18n="Connections">All</div>
+                            <div data-i18n="Connections">{{ __('messages.all') }}</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('back.admins.create') }}" class="menu-link">
-                            <div data-i18n="Connections">Create</div>
+                            <div data-i18n="Connections">{{ __('messages.create') }}</div>
                         </a>
                     </li>
                 </ul>
@@ -115,17 +115,17 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Head Of Departments</div>
+                <div data-i18n="Account Settings">{{ __('messages.head_of_departments') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="{{ route('head_of_departments.index') }}" class="menu-link">
-                        <div data-i18n="Connections">All</div>
+                        <div data-i18n="Connections">{{ __('messages.all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('head_of_departments.create') }}" class="menu-link">
-                        <div data-i18n="Connections">Create</div>
+                        <div data-i18n="Connections">{{ __('messages.create') }}</div>
                     </a>
                 </li>
             </ul>
@@ -133,17 +133,17 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Doctors</div>
+                <div data-i18n="Account Settings">{{ __('messages.doctors') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="{{ route('doctors.index') }}" class="menu-link">
-                        <div data-i18n="Connections">All</div>
+                        <div data-i18n="Connections">{{ __('messages.all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('doctors.create') }}" class="menu-link">
-                        <div data-i18n="Connections">Create</div>
+                        <div data-i18n="Connections">{{ __('messages.create') }}</div>
                     </a>
                 </li>
             </ul>
@@ -151,17 +151,17 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Students</div>
+                <div data-i18n="Account Settings">{{ __('messages.students') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="{{ route('students.index') }}" class="menu-link">
-                        <div data-i18n="Connections">All</div>
+                        <div data-i18n="Connections">{{ __('messages.all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('students.create') }}" class="menu-link">
-                        <div data-i18n="Connections">Create</div>
+                        <div data-i18n="Connections">{{ __('messages.create') }}</div>
                     </a>
                 </li>
             </ul>
@@ -174,17 +174,17 @@
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                    <div data-i18n="Account Settings">Roles</div>
+                    <div data-i18n="Account Settings">{{ __('messages.roles') }}</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
                         <a href="{{ route('back.roles.index') }}" class="menu-link">
-                            <div data-i18n="Connections">All</div>
+                            <div data-i18n="Connections">{{ __('messages.all') }}</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('back.roles.create') }}" class="menu-link">
-                            <div data-i18n="Connections">Create</div>
+                            <div data-i18n="Connections">{{ __('messages.create') }}</div>
                         </a>
                     </li>
                 </ul>
@@ -192,17 +192,17 @@
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                    <div data-i18n="Authentications">Permissions</div>
+                    <div data-i18n="Authentications">{{ __('messages.permissions') }}</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
                         <a href="{{ route('back.permissions.index') }}" class="menu-link">
-                            <div data-i18n="Basic">All</div>
+                            <div data-i18n="Basic">{{ __('messages.all') }}</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('back.permissions.create') }}" class="menu-link">
-                            <div data-i18n="Basic">Create</div>
+                            <div data-i18n="Basic">{{ __('messages.create') }}</div>
                         </a>
                     </li>
                 </ul>
@@ -213,56 +213,55 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Subjects</div>
+                <div data-i18n="Account Settings">{{ __('messages.subjects') }}</div>
             </a>
             <ul class="menu-sub">
                 @role('Super-Admin', 'admin')
                 <li class="menu-item">
                     <a href="{{ route('subjects.index') }}" class="menu-link">
-                        <div data-i18n="Connections">All</div>
+                        <div data-i18n="Connections">{{ __('messages.all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('subjects.create') }}" class="menu-link">
-                        <div data-i18n="Connections">Create</div>
+                        <div data-i18n="Connections">{{ __('messages.create') }}</div>
                     </a>
                 </li>
                 @endrole
                 @role('Doctor', 'doctor')
                 <li class="menu-item">
                     <a href="{{ route('subjects.doctor') }}" class="menu-link">
-                        <div data-i18n="Connections">My Subjects</div>
+                    <div data-i18n="Connections">{{ __('messages.my_subjects') }}</div>
                     </a>
                 </li>
                 @endrole
                 @role('Student', 'web')
                 <li class="menu-item">
                     <a href="{{ route('subjects.student') }}" class="menu-link">
-                        <div data-i18n="Connections">My Subjects</div>
+                        <div data-i18n="Connections">{{ __('messages.my_subjects') }}</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('subjects.student.may.register') }}" class="menu-link">
-                        <div data-i18n="Connections">Register</div>
+                        <div data-i18n="Connections">{{ __('messages.register_subject') }}</div>
                     </a>
                 </li>
                 @endrole
             </ul>
         </li>
 
-        {{-- @hasanyrole('Head-Of-Department'|'Student') --}}
         @if(Auth::guard('head')->check() || auth()->user()?->hasRole('Student'))
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-box"></i>
-                    <div data-i18n="User interface">Excuses</div>
+                    <div data-i18n="User interface">{{ __('messages.excuses') }}</div>
                 </a>
                 <ul class="menu-sub">
 
                     @role('Head-Of-Department', 'head')
                         <li class="menu-item">
                             <a href="{{ route('excuses.index') }}" class="menu-link">
-                                <div data-i18n="Basic">All Student's Excuses</div>
+                                <div data-i18n="Basic">{{ __('messages.all_Students_excuses') }}</div>
                             </a>
                         </li>
                     @endrole
@@ -270,12 +269,12 @@
                     @role('Student', 'web')
                         <li class="menu-item">
                             <a href="{{ route('excuses.create') }}" class="menu-link">
-                                <div data-i18n="Accordion">Create</div>
+                                <div data-i18n="Accordion">{{ __('messages.create') }}</div>
                             </a>
                         </li>
                         <li class="menu-item">
                             <a href="{{ route('excuses.student') }}" class="menu-link">
-                                <div data-i18n="Alerts">Index</div>
+                                <div data-i18n="Alerts">{{ __('messages.all') }}</div>
                             </a>
                         </li>
                     @endrole

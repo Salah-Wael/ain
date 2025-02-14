@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+@section('title', __('messages.list') . ' ' . __('messages.students'))
+
 @section('content')
 <div class="container">
-    <h1>Students</h1>
-    <a href="{{ route('students.create') }}" class="btn btn-primary mb-3">Add Student</a>
+    <h2>{{ __('messages.list') }} {{ __('messages.students') }}</h2>
+    <a href="{{ route('students.create') }}" class="btn btn-primary mb-3">{{ __('messages.add') }} {{ __('messages.student') }}</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -12,11 +14,11 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Department</th>
-                <th>Actions</th>
+                <th>{{ __('messages.student_id') }}</th>
+                <th>{{ __('messages.name') }}</th>
+                <th>{{ __('messages.email') }}</th>
+                <th>{{ __('messages.department') }}</th>
+                <th>{{ __('messages.actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -27,11 +29,11 @@
                 <td>{{ $student->email }}</td>
                 <td>{{ $student->department->name }}</td>
                 <td>
-                    <a href="{{ route('students.edit', $student) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ route('students.edit', $student) }}" class="btn btn-warning btn-sm">{{ __('messages.edit') }}</a>
                     <form action="{{ route('students.destroy', $student) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">{{ __('messages.delete') }}</button>
                     </form>
                 </td>
             </tr>

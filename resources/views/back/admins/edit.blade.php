@@ -9,17 +9,17 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">{{ __('messages.name') }}</label>
             <input type="text" name="name" class="form-control" value="{{ $admin->name }}" required>
         </div>
 
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">{{ __('messages.email') }}</label>
             <input type="email" name="email" class="form-control" value="{{ $admin->email }}" required>
         </div>
 
         <div class="form-group">
-            <label for="roles">Assign Roles</label>
+            <label for="roles">{{ __('messages.assign') }} {{ __('messages.roles') }}</label>
             <select name="roleArray[]" class="form-control" multiple>
                 @foreach($roles as $role)
                     <option value="{{ $role->name }}" @if($admin->roles->pluck('name')->contains($role->name)) selected @endif>
@@ -29,6 +29,6 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Admin</button>
+        <button type="submit" class="btn btn-primary">{{ __('messages.update') }} {{ __('messages.admin') }}</button>
     </form>
 @endsection

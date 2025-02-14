@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\LanguageMiddleware;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use App\Http\Middleware\CheckGuardAuthMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,6 +18,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+
+        $middleware->web(append: [
+            LanguageMiddleware::class,
+        ]);
+
         $middleware->alias([
             'role' => RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,

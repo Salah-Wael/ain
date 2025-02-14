@@ -65,6 +65,7 @@ Route::prefix('/back')->name('back.')->group(function () {
     ->except(['show']);
 
     Route::prefix('roles')->name('roles.')
+    ->middleware('role:Super-Admin,admin')
     ->controller(RoleController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');

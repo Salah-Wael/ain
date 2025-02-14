@@ -7,7 +7,7 @@
     ];
 
     $currentGuard = collect($guards)->first(fn($prefix, $guard) => Auth::guard($guard)->check());
-    $assetPath = $currentGuard ? asset("assets-$currentGuard") : asset('assets-default');
+    $assetPath = $currentGuard ? asset("assets-$currentGuard") : asset('assets-front');
 ?>
 
 <!DOCTYPE html>

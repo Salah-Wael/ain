@@ -3,21 +3,21 @@
 @section('title', 'Admins List')
 
 @section('content')
-    <h2>Admins List</h2>
+    <h2>{{ __('messages.list') }}{{ __('messages.admins') }}</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('back.admins.create') }}" class="btn btn-primary">Create Admin</a>
+    <a href="{{ route('back.admins.create') }}" class="btn btn-primary">{{ __('messages.create') }} {{ __('messages.admin') }}</a>
 
     <table class="table table-striped mt-4">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Actions</th>
+                <th>{{ __('messages.name') }}</th>
+                <th>{{ __('messages.email') }}</th>
+                <th>{{ __('messages.roles') }}</th>
+                <th>{{ __('messages.actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -36,11 +36,11 @@
 
 
                     <td>
-                        <a href="{{ route('back.admins.edit', $admin->id) }}" class="btn btn-info">Edit</a>
+                        <a href="{{ route('back.admins.edit', $admin->id) }}" class="btn btn-info">{{ __('messages.edit') }}</a>
                         <form action="{{ route('back.admins.destroy', $admin->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">{{ __('messages.delete') }}</button>
                         </form>
                     </td>
                 </tr>

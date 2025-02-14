@@ -63,7 +63,10 @@ Route::controller(TaskAnswerController::class)->name('task-answers.')->group(fun
     Route::post('/taskddd-answers', 'store')->middleware('role:Student')->name('store');
 });
 
-
+Route::post('/lang/{locale}', function ($locale) {
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->name('changeLang');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

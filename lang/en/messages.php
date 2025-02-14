@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     'notification_sent' => 'Notifications sent successfully.',
     'not_found' => 'No comments found.',
     'try_again' => 'Try again later please.',

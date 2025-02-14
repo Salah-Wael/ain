@@ -8,14 +8,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h2 class="h5 page-title">{{ __('lang.roles') }}</h2>
+                <h2 class="h5 page-title">{{ __('messages.roles') }}</h2>
 
                 <div class="page-title-right">
-                    {{-- @if (permission(['add_roles'])) --}}
                     <a href="{{ route('back.roles.create') }}" class="btn btn-primary">
-                        {{ __('lang.add_new') }}
+                        {{ __('messages.add') }}
                     </a>
-                    {{-- @endif --}}
                 </div>
             </div>
         </div>
@@ -31,10 +29,9 @@
                     <thead class="bg-light">
                         <tr>
                             <th class="text-primary" width="5%">#</th>
-                            <th class="text-primary">{{ __('lang.name') }}</th>
-                            <th class="text-primary">{{ __('lang.can') }}</th>
-                            <th class="text-primary">{{ __('lang.permissions') }}</th>
-                            <th class="text-primary" width="11%">{{ __('lang.actions') }}</th>
+                            <th class="text-primary">{{ __('messages.name') }}</th>
+                            <th class="text-primary">{{ __('messages.permissions') }}</th>
+                            <th class="text-primary" width="11%">{{ __('messages.actions') }}</th>
                         </tr>
                     </thead>
 
@@ -43,7 +40,6 @@
                             <tr>
                                 <td>{{ $data['data']->firstItem() + $loop->index }}</td>
                                 <td>{{ displayRole($item->name) }}</td>
-                                <td>can</td>
                                 <td>
                                     @foreach ($item->permissions as $permission)
                                         <span class="badge bg-primary">{{ displayPermission($permission->name) }}</span>
@@ -52,27 +48,21 @@
                                 <td>
                                     <div class="btn-group">
 
-                                            {{-- @if (permission(['edit_roles'])) --}}
                                             <a href="{{ route('back.roles.edit', ['role' => $item]) }}"
                                                 class="btn btn-sm btn-warning">
-                                                {{-- <span class="bx bx-edit-alt"></span> --}}
-                                                {{ __('lang.edit') }}
+                                                {{ __('messages.edit') }}
                                             </a>
-                                            {{-- @endif --}}
 
-                                            {{-- @if (permission(['delete_roles'])) --}}
                                             <form action="{{ route('back.roles.destroy', ['role' => $item]) }}" method="POST" style="display:inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">{{ __('lang.delete') }}</button>
+                                                <button type="submit" class="btn btn-sm btn-danger">{{ __('messages.delete') }}</button>
                                             </form>
-                                            {{-- @endif --}}
-
                                     </div>
                                 </td>
                             </tr>
                         @empty
-                            No Roles
+                            {{ __('messages.not_found') }}
                         @endforelse
                     </tbody>
                 </table>

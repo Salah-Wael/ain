@@ -26,7 +26,29 @@ if (!function_exists('sendError')) {
 }
 
 function displayRole($roleName){
-    return ucwords(str_replace('-', ' ', strtolower($roleName)));
+    $role = ucwords(str_replace('-', ' ', strtolower($roleName)));
+    if(app()->getLocale() == 'ar'){
+        switch ($role) {
+            case 'Admin':
+                return 'أدمن';
+                break;
+            case 'Super Admin':
+                return 'سوبر أدمن';
+                break;
+            case 'Head Of Department':
+                return 'رئيس قسم';
+                break;
+            case 'Doctor':
+                return 'دكتور جامعي';
+                break;
+            case 'Student':
+                return 'طالب';
+                break;
+            default:
+                return $role;
+        }
+    }
+    return $role;
 }
 
 function displayPermission($permissionName){
