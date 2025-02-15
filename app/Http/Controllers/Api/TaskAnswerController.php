@@ -39,29 +39,21 @@ class TaskAnswerController extends Controller
             'answer_file' => 'required|file|max:10000',
         ]);
 
-        $answer = TaskAnswer::firstWhere([
-            'task_id' => $request->task_id,
-            'student_id' => Auth::id(),
-        ]);
-
-        if ($answer) {
-            if ($this->deleteFile('task-answers/' . $answer->path)) {
-                $answer->delete();
-            } else {
-                return sendError('Error deleting the previous Answer.');
-            }
-        }
 
         $task = Task::find($request->task_id);
 
         $path = $this->uploadFile($request->file('answer_file'), 'task-answers');
 
         if ($path) {
-            TaskAnswer::create([
-                'task_id' => $task->id,
-                'student_id' => Auth::user()->id,
-                'path' => $path,
-            ]);
+            TaskAnswer::updateOrCreate(
+                [
+                    'task_id' => $request->task_id,
+                    'student_id' => Auth::user()->id,
+                ],
+                [
+                    'path' => $path,
+                ]
+            );
             return sendResponse([], 'Answer uploaded successfully.');
         }
         return sendError('', 'Try again later please.');
