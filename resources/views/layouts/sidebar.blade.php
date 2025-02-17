@@ -216,7 +216,7 @@
                 <div data-i18n="Account Settings">{{ __('messages.subjects') }}</div>
             </a>
             <ul class="menu-sub">
-                @role('Super-Admin', 'admin')
+                @hasanyrole('Super-Admin|Admin', 'admin')
                 <li class="menu-item">
                     <a href="{{ route('subjects.index') }}" class="menu-link">
                         <div data-i18n="Connections">{{ __('messages.all') }}</div>
@@ -227,7 +227,7 @@
                         <div data-i18n="Connections">{{ __('messages.create') }}</div>
                     </a>
                 </li>
-                @endrole
+                @endhasanyrole
                 @role('Doctor', 'doctor')
                 <li class="menu-item">
                     <a href="{{ route('subjects.doctor') }}" class="menu-link">
@@ -250,7 +250,7 @@
             </ul>
         </li>
 
-        @if(Auth::guard('head')->check() || auth()->user()?->hasRole('Student'))
+        @hasanyrole('Student|Head-Of-Department')
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-box"></i>
@@ -281,7 +281,7 @@
 
                 </ul>
             </li>
-        @endif
+        @endhasanyrole
 
     </ul>
 </aside>
