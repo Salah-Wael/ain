@@ -57,19 +57,19 @@ class StudentAuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return sendError(__('messages.validation_error'), $validator->errors());
+            return sendError('Validation error occurred.', $validator->errors());
         }
 
         $user = $request->user();
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return sendError(__('messages.current_password_mismatch'));
+            return sendError('Current password does not match.');
         }
 
         $user->forceFill([
             'password' => Hash::make($request->new_password),
         ])->save();
 
-        return sendResponse([], __('messages.password_updated_successfully'));
+        return sendResponse([], 'Password updated successfully.');
     }
 }
