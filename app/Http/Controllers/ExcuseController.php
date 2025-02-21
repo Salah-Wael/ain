@@ -14,6 +14,7 @@ class ExcuseController extends Controller
     public function index()
     {
         $excuses = Excuse::with('student')
+        ->where('department_id', Auth::guard('head')->user()->department_id)
         ->where('status', 'pending')
         ->orderBy('created_at', 'desc')
         ->paginate(10);
