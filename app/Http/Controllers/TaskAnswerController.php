@@ -21,7 +21,7 @@ class TaskAnswerController extends Controller
     {
         $request->validate([
             'task_id' => 'required|exists:tasks,id',
-            'answer_file' => 'required|file|max:2048', // الحد الأقصى 2MB
+            'answer_file' => 'required|file|max:11200|mimetypes:application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png',
         ]);
 
         $answer = TaskAnswer::firstWhere([

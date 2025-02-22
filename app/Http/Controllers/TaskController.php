@@ -14,11 +14,13 @@ class TaskController extends Controller
     /**
      * Display a listing of the tasks.
      */
-    // public function index()
-    // {
-    //     $tasks = Task::get();
-    //     return view('tasks.index', compact('tasks'));
-    // }
+    public function showStudentsAnswers($task_id)
+    {
+        $task = Task::with('answers.student')
+        ->findOrFail($task_id);
+
+        return view('subjects.task-answers.show-students-answers', compact('task'));
+    }
 
     /**
      * Store a newly created task in storage.

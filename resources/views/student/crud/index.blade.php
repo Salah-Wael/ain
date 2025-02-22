@@ -7,10 +7,6 @@
     <h2>{{ __('messages.list') }} {{ __('messages.students') }}</h2>
     <a href="{{ route('students.create') }}" class="btn btn-primary mb-3">{{ __('messages.add') }} {{ __('messages.student') }}</a>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
     <table class="table table-bordered">
         <thead>
             <tr>

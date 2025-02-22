@@ -57,10 +57,11 @@ Route::controller(TaskController::class)->group(function () {
     Route::get('/tasks/{task}/edit', 'edit')->name('tasks.edit');
     Route::put('/tasks/{task}', 'update')->name('tasks.update');
     Route::delete('/tasks/{task}', 'destroy')->name('tasks.destroy');
+    Route::get('task-answers/{task_id}', 'showStudentsAnswers')->name('task-answers.show');
 });
 
 Route::controller(TaskAnswerController::class)->name('task-answers.')->group(function () {
-    Route::post('/taskddd-answers', 'store')->middleware('role:Student')->name('store');
+    Route::post('/all-task-answers', 'store')->middleware('role:Student')->name('store');
 });
 
 Route::post('/lang/{locale}', function ($locale) {

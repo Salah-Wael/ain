@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('title', __('messages.list') . ' ' . __('messages.subjects'))
+
 @section('content')
 <div class="container">
-    <h2>Subjects</h2>
+    <h2>{{ __('messages.list') }} {{ __('messages.subjects') }}</h2>
 
     @hasanyrole('Super-Admin|Admin', 'admin')
         <a href="{{ route('subjects.create') }}" class="btn btn-primary mb-3">Create New Subject</a>

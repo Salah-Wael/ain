@@ -1,28 +1,30 @@
 @extends('layouts.app')
 
+@section('title', $subject->name)
+
 @section('content')
 <div class="container">
     <h2>{{ $subject->name }}</h2>
-    <p><strong>Code:</strong> {{ $subject->code }}</p>
-    <p><strong>Department:</strong> {{ $subject->department->name ?? 'N/A' }}</p>
-    <p><strong>Semesters:</strong> {{ $subject->semesters->pluck('name')->join(', ') ?: 'N/A' }}</p>
-    <p><strong>Hours:</strong> {{ $subject->hours }}</p>
-    <p><strong>Academic Years:</strong> {{ $subject->academicYears->pluck('year')->join(', ') ?: 'N/A' }}</p>
-    <p><strong>Doctors:</strong> {{ $subject->doctors->pluck('name')->join(', ') ?: 'N/A' }}</p>
+    <p><strong>{{ __('messages.subject_code') }}</strong> {{ $subject->code }}</p>
+    <p><strong>{{ __('messages.department') }}</strong> {{ $subject->department->name ?? 'N/A' }}</p>
+    <p><strong>{{ __('messages.semesters') }}</strong> {{ $subject->semesters->pluck('name')->join(', ') ?: 'N/A' }}</p>
+    <p><strong>{{ __('messages.hours_count') }}</strong> {{ $subject->hours }}</p>
+    <p><strong>{{ __('messages.academic_years') }}</strong> {{ $subject->academicYears->pluck('year')->join(', ') ?: 'N/A' }}</p>
+    <p><strong>{{ __('messages.doctors') }}</strong> {{ $subject->doctors->pluck('name')->join(', ') ?: 'N/A' }}</p>
 
-    <a href="{{ route('subjects.index') }}" class="btn btn-secondary">Back to List</a>
+    <a href="{{ route('subjects.index') }}" class="btn btn-secondary">{{ __('messages.back') }}</a>
 
     <hr>
 
     <!-- Lectures Section -->
-    <h3>Lectures</h3>
+    <h3>{{ __('messages.lectures') }}</h3>
 
     @role('Doctor', 'doctor')
         <form action="{{ route('lectures.store') }}" method="POST">
             @csrf
             <input type="hidden" name="subject_id" value="{{ $subject->id }}">
             <input type="text" name="name" class="form-control" placeholder="Lecture Name" required>
-            <button type="submit" class="btn btn-primary mt-2">Add Lecture</button>
+            <button type="submit" class="btn btn-primary mt-2">{{ __('messages.add_lecture') }}</button>
         </form>
     @endrole
 
@@ -34,12 +36,12 @@
 
                     <div>
                         @role('Doctor', 'doctor')
-                            <button class="btn btn-sm btn-success add-task-btn" data-lecture-id="{{ $lecture->id }}">Add Task</button>
-                            <a href="{{ route('lectures.edit', $lecture->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <button class="btn btn-sm btn-success add-task-btn" data-lecture-id="{{ $lecture->id }}">{{ __('messages.add_task') }}</button>
+                            <a href="{{ route('lectures.edit', $lecture->id) }}" class="btn btn-sm btn-warning">{{ __('messages.edit') }}</a>
                             <form action="{{ route('lectures.destroy', $lecture->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">{{ __('messages.delete') }}</button>
                             </form>
                         @endrole
                     </div>
@@ -52,7 +54,7 @@
                         <input type="hidden" name="lecture_id" value="{{ $lecture->id }}">
                         <input type="file" name="file" class="form-control mt-2" required>
                         <input type="date" name="deadline" class="form-control mt-2" required>
-                        <button type="submit" class="btn btn-sm btn-primary mt-2">Upload Task</button>
+                        <button type="submit" class="btn btn-sm btn-primary mt-2">{{ __('messages.upload_task') }}</button>
                     </form>
                 </li>
 
@@ -94,18 +96,19 @@
 
                                         <div class="input-group">
                                             <input type="file" name="answer_file" class="form-control form-control-sm" required>
-                                            <button type="submit" class="btn btn-success btn-sm">Upload</button>
+                                            <button type="submit" class="btn btn-success btn-sm">{{ __('messages.upload') }}</button>
                                         </div>
                                     </form>
                                 @endrole
 
-                                <a href="{{ $filePath }}" download class="btn btn-sm btn-primary">Download</a>
+                                <a href="{{ $filePath }}" download class="btn btn-sm btn-primary">{{ __('messages.download') }}</a>
 
                                 @role('Doctor', 'doctor')
+                                    <a href="{{ route('task-answers.show', $task->id) }}" class="btn btn-sm btn-warning">{{ __('messages.students_answers') }}</a>
                                     <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">{{ __('messages.delete') }}</button>
                                     </form>
                                 @endrole
                             </div>
@@ -116,7 +119,7 @@
             @endforeach
         </ul>
     @else
-        <p>No lectures available.</p>
+        <p>{{ __('messages.not_found')  .' '. __('messages.lectures')}}</p>
     @endif
 </div>
 

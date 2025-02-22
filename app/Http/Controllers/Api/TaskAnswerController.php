@@ -24,7 +24,6 @@ class TaskAnswerController extends Controller
         $student['task_path'] = self::TASK_PATH;
         $student['answer_path'] = self::ANSWER_PATH;
 
-
         return sendResponse($student, 'Tasks and Answers fetched successfully.');
     }
 
