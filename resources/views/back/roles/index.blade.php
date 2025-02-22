@@ -46,19 +46,19 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <div class="btn-group">
+                                   
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('back.roles.edit', ['role' => $item]) }}" class="btn btn-sm btn-warning flex-grow-1">
+                                            {{ __('messages.edit') }}
+                                        </a>
 
-                                            <a href="{{ route('back.roles.edit', ['role' => $item]) }}"
-                                                class="btn btn-sm btn-warning">
-                                                {{ __('messages.edit') }}
-                                            </a>
-
-                                            <form action="{{ route('back.roles.destroy', ['role' => $item]) }}" method="POST" style="display:inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">{{ __('messages.delete') }}</button>
-                                            </form>
+                                        <form action="{{ route('back.roles.destroy', ['role' => $item]) }}" method="POST" class="m-0 flex-grow-1">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger w-100">{{ __('messages.delete') }}</button>
+                                        </form>
                                     </div>
+
                                 </td>
                             </tr>
                         @empty

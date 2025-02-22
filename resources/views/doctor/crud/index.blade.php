@@ -26,14 +26,22 @@
                 {{ $subject->name }},
                 @endforeach
             </td>
+            
             <td>
-                <a href="{{ route('doctors.edit', $doctor->id) }}" class="btn btn-warning">{{ __('messages.edit') }}</a>
-                <form action="{{ route('doctors.destroy', $doctor->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">{{ __('messages.delete') }}</button>
-                </form>
+                <div style="display: flex; gap: 5px;">
+                    <a href="{{ route('doctors.edit', $doctor->id) }}" class="btn btn-warning btn-sm">
+                        {{ __('messages.edit') }}
+                    </a>
+                    <form action="{{ route('doctors.destroy', $doctor->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            {{ __('messages.delete') }}
+                        </button>
+                    </form>
+                </div>
             </td>
+            
         </tr>
         @endforeach
     </tbody>
