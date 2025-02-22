@@ -11,7 +11,8 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr"
+<html lang="en" class="light-style layout-menu-fixed"
+    dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}"
     data-theme="theme-default" data-assets-path="{{ $assetPath }}/"
     data-template="vertical-menu-template-free">
 
@@ -35,6 +36,12 @@
 
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        @if(session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+                        @if(session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
                         @yield('content')
                     </div>
 

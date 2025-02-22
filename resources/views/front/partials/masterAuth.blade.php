@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 
 <html
-  lang="en"
   class="light-style customizer-hide"
-  dir="ltr"
+  dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}"
   data-theme="theme-default"
   data-assets-path="{{ asset('assets-front') }}/"
   data-template="vertical-menu-template-free"
@@ -63,7 +62,7 @@
             <div class="card-body">
                 <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
+                <a href="#" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                     <svg
                       width="25"
@@ -119,8 +118,9 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Student</span>
+                  <span class="app-brand-text demo text-body fw-bolder">{{ __('messages.student') }}</span>
                 </a>
+
               </div>
               <!-- /Logo -->
                 @yield('content')

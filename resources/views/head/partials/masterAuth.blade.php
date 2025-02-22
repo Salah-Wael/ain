@@ -119,7 +119,7 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Head Of Department</span>
+                  <span class="app-brand-text demo text-body fw-bolder">{{ __('messages.head_of_department') }}</span>
                 </a>
               </div>
               <!-- /Logo -->
