@@ -26,16 +26,22 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|unique:students,email',
-            'password' => 'required|string|min:6',
+            'password' => 'nullable|string|min:8',
             'department_id' => 'required|exists:departments,id',
         ]);
 
-        User::create([
+        if (!$request->filled('password')) {
+            $request->merge(['password' => 123456789]);
+        }
+
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password), // Encrypt the password
             'department_id' => $request->department_id,
         ]);
+
+        $user->assignRole('Student');
 
         return redirect()->route('students.index')->with('success', __('messages.student_created'));
     }

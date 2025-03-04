@@ -17,7 +17,7 @@
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">{{ __('messages.password') }}</label>
-            <input type="password" name="password" id="password" class="form-control" required>
+            <input type="password" name="password" id="password" class="form-control">
         </div>
         <div class="mb-3">
             <label for="department_id" class="form-label">{{ __('messages.department') }}</label>
