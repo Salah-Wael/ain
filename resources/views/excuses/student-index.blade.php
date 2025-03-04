@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Excuses')
+@section('title', __('messages.list') . ' ' . __('messages.excuses'))
 
 @section('content')
     <div class="container">
-        <h2>Excuses</h2>
-        <a href="{{ route('excuses.create') }}" class="btn btn-primary mb-3">Create Excuse</a>
+        <h2>{{ __('messages.list') }} {{ __('messages.excuses') }}</h2>
+        <a href="{{ route('excuses.create') }}" class="btn btn-primary mb-3">{{ __('messages.create') }}</a>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Student ID</th>
-                    <th>Student Name</th>
-                    <th>Reason</th>
-                    <th>Department</th>
-                    <th>Material</th>
-                    <th>Material Images</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>{{ __('messages.student_id') }}</th>
+                    <th>{{ __('messages.name') }}</th>
+                    <th>{{ __('messages.reason') }}</th>
+                    <th>{{ __('messages.department') }}</th>
+                    <th>{{ __('messages.material') }}</th>
+                    <th>{{ __('messages.material_images') }}</th>
+                    <th>{{ __('messages.status') }}</th>
+                    <th>{{ __('messages.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,20 +34,20 @@
                         </td>
                         <td>
                             @if ($excuse->status === 'approved')
-                                <a class="btn btn-info btn-sm">Approved</a>
+                                <a class="btn btn-info btn-sm">{{ __('messages.approved') }}</a>
                             @elseif ($excuse->status === 'pending')
-                                <a class="btn btn-warning btn-sm">Pending</a>
+                                <a class="btn btn-warning btn-sm">{{ __('messages.pending') }}</a>
                             @elseif ($excuse->status === 'rejected')
-                                <a class="btn btn-danger btn-sm">Rejected</a>
+                                <a class="btn btn-danger btn-sm">{{ __('messages.rejected') }}</a>
                             @endif
                         </td>
                         <td>
                             @if ($excuse->status === 'pending')
-                                <a href="{{ route('excuses.edit', $excuse) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('excuses.edit', $excuse) }}" class="btn btn-warning btn-sm">{{ __('messages.edit') }}</a>
                                 <form action="{{ route('excuses.destroy', $excuse) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">{{ __('messages.delete') }}</button>
                                 </form>
                             @endif
                         </td>

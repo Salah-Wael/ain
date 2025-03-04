@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Create Excuse')
+@section('title', __('messages.create') . ' ' . __('messages.excuse'))
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <h5 class="card-header">Create Excuse</h5>
+                    <h5 class="card-header">{{ __('messages.create') . ' ' . __('messages.excuse') }}</h5>
                     <div class="card-body">
                         <form action="{{ route('excuses.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <!-- Reason Field -->
                             <div class="mb-3">
-                                <label for="reason" class="form-label">Reason</label>
+                                <label for="reason" class="form-label">{{ __('messages.reason') }}</label>
                                 <input
                                     type="text"
                                     name="reason"
@@ -26,7 +26,7 @@
 
                             <!-- Description Field -->
                             <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
+                                <label for="description" class="form-label">{{ __('messages.description') }}</label>
                                 <textarea
                                     name="description"
                                     id="description"
@@ -37,21 +37,21 @@
 
                             <!-- Material Dropdown -->
                             <div class="mb-3">
-                                <label for="material" class="form-label">Material</label>
+                                <label for="material" class="form-label">{{ __('messages.material') }}</label>
                                 <select name="material" id="material" class="form-select" required>
-                                    <option value="" disabled selected>Select material type</option>
-                                    <option value="Medical Report">Medical Report</option>
-                                    <option value="Medical Examinations">Medical Examinations</option>
-                                    <option value="Passport Photo">Passport Photo</option>
-                                    <option value="Other">Other</option>
+                                    <option value="" disabled selected>{{ __('messages.select') .' '. __('messages.material') }}</option>
+                                    <option value="Medical Report">{{ __('messages.medical_report') }}</option>
+                                    <option value="Medical Examinations">{{ __('messages.medical_examinations') }}</option>
+                                    <option value="Passport Photo">{{ __('messages.passport_photo') }}</option>
+                                    <option value="Other">{{ __('messages.other') }}</option>
                                 </select>
                             </div>
 
                             <!-- Departments Dropdown -->
                             <div class="mb-3">
-                                <label for="department" class="form-label">Department</label>
+                                <label for="department" class="form-label">{{ __('messages.department') }}</label>
                                 <select name="department" id="department" class="form-select" required>
-                                    <option value="" disabled selected>Select a department</option>
+                                    <option value="" disabled selected>{{ __('messages.select') . ' ' . __('messages.department') }}</option>
                                     @foreach ($departments as $department)
                                         <option value="{{ $department->name }}">{{ $department->name }}</option>
                                     @endforeach
@@ -62,10 +62,10 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card">
-                                        <h5 class="card-header">Upload Supporting Documents</h5>
+                                        <h5 class="card-header">{{ __('messages.upload_supporting_documents') }}</h5>
                                         <div class="card-body demo-vertical-spacing demo-only-element">
                                             <div class="input-group">
-                                                <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                                                <label class="input-group-text" for="inputGroupFile01">{{ __('messages.upload') }}</label>
                                                 <input
                                                     type="file"
                                                     name="images[]"
@@ -86,7 +86,7 @@
                                     type="submit"
                                     class="btn btn-outline-primary"
                                     id="create_excuse">
-                                    Create Excuse
+                                    {{ __('messages.create') . ' ' . __('messages.excuse') }}
                                 </button>
                             </div>
                         </form>

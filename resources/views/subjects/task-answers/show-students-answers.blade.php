@@ -29,8 +29,11 @@
                             @if (in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png']))
                                 <img src="{{ $filePath }}" alt="{{ trans('messages.uploaded_image') }}" width="100">
                             @elseif (in_array(strtolower($fileExtension), ['pdf', 'doc', 'docx']))
-                                <a href="{{ $filePath }}" target="_blank" class="btn btn-primary btn-sm">
+                                <a href="{{ $filePath }}" target="_blank" class="btn btn-success btn-sm">
                                     {{ trans('messages.view_file') }}
+                                </a>
+                                <a href="{{ $filePath }}" download class="btn btn-sm btn-primary">
+                                    {{ __('messages.download') }}
                                 </a>
                             @else
                                 <span class="text-danger">{{ trans('messages.unsupported_file_type') }}</span>
