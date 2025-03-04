@@ -57,6 +57,12 @@ class SubjectController extends Controller
         return view('subjects.index', compact('subjects'));
     }
 
+    public function allStudentsSubject($subject_id)
+    {
+        $subject = Subject::with(['students'])->findOrFail($subject_id);
+        return view('subjects.students', compact('subject'));
+    }
+
     public function subjectsStudentMayRegister()
     {
         $subjects = Subject::with(['department', 'doctors', 'semesters'])
@@ -96,15 +102,18 @@ class SubjectController extends Controller
         return view('subjects.create', get_defined_vars());
     }
 
-    public function show(Subject $subject)
+    public function show($subject_id)
     {
-        $subject->load([
+        $subject = Subject::with([
             'department',
             'semesters',
             'academicYears',
             'doctors',
             'lectures.tasks.answers.student',
-        ]); // Eager load related models
+        ])
+        ->withCount('students')
+        ->findOrFail($subject_id);
+
 
         return view('subjects.show', compact('subject'));
     }

@@ -210,47 +210,49 @@
         @endrole
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">{{ __('messages.subjects') }}</div>
-            </a>
-            <ul class="menu-sub">
-                @hasanyrole('Super-Admin|Admin', 'admin')
-                <li class="menu-item">
-                    <a href="{{ route('subjects.index') }}" class="menu-link">
-                        <div data-i18n="Connections">{{ __('messages.all') }}</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('subjects.create') }}" class="menu-link">
-                        <div data-i18n="Connections">{{ __('messages.create') }}</div>
-                    </a>
-                </li>
-                @endhasanyrole
-                @role('Doctor', 'doctor')
-                <li class="menu-item">
-                    <a href="{{ route('subjects.doctor') }}" class="menu-link">
-                    <div data-i18n="Connections">{{ __('messages.my_subjects') }}</div>
-                    </a>
-                </li>
-                @endrole
-                @role('Student', 'web')
-                <li class="menu-item">
-                    <a href="{{ route('subjects.student') }}" class="menu-link">
+        @if(!Auth::guard('head')->check())
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">{{ __('messages.subjects') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    @hasanyrole('Super-Admin|Admin', 'admin')
+                    <li class="menu-item">
+                        <a href="{{ route('subjects.index') }}" class="menu-link">
+                            <div data-i18n="Connections">{{ __('messages.all') }}</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('subjects.create') }}" class="menu-link">
+                            <div data-i18n="Connections">{{ __('messages.create') }}</div>
+                        </a>
+                    </li>
+                    @endhasanyrole
+                    @role('Doctor', 'doctor')
+                    <li class="menu-item">
+                        <a href="{{ route('subjects.doctor') }}" class="menu-link">
                         <div data-i18n="Connections">{{ __('messages.my_subjects') }}</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('subjects.student.may.register') }}" class="menu-link">
-                        <div data-i18n="Connections">{{ __('messages.register_subject') }}</div>
-                    </a>
-                </li>
-                @endrole
-            </ul>
-        </li>
+                        </a>
+                    </li>
+                    @endrole
+                    @role('Student', 'web')
+                    <li class="menu-item">
+                        <a href="{{ route('subjects.student') }}" class="menu-link">
+                            <div data-i18n="Connections">{{ __('messages.my_subjects') }}</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('subjects.student.may.register') }}" class="menu-link">
+                            <div data-i18n="Connections">{{ __('messages.register_subject') }}</div>
+                        </a>
+                    </li>
+                    @endrole
+                </ul>
+            </li>
+        @endif
 
-        @hasanyrole('Student|Head-Of-Department')
+        @if(Auth::guard('head')->check() || auth()->user()?->hasRole('Student'))
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-box"></i>
@@ -281,7 +283,7 @@
 
                 </ul>
             </li>
-        @endhasanyrole
+        @endif
 
     </ul>
 </aside>

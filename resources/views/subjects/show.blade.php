@@ -5,13 +5,16 @@
 @section('content')
 <div class="container">
     <h2>{{ $subject->name }}</h2>
-    <p><strong>{{ __('messages.subject_code') }}</strong> {{ $subject->code }}</p>
-    <p><strong>{{ __('messages.department') }}</strong> {{ $subject->department->name ?? 'N/A' }}</p>
-    <p><strong>{{ __('messages.semesters') }}</strong> {{ $subject->semesters->pluck('name')->join(', ') ?: 'N/A' }}</p>
-    <p><strong>{{ __('messages.hours_count') }}</strong> {{ $subject->hours }}</p>
-    <p><strong>{{ __('messages.academic_years') }}</strong> {{ $subject->academicYears->pluck('year')->join(', ') ?: 'N/A' }}</p>
-    <p><strong>{{ __('messages.doctors') }}</strong> {{ $subject->doctors->pluck('name')->join(', ') ?: 'N/A' }}</p>
+    <p><strong>{{ __('messages.subject_code') }}:</strong> {{ $subject->code }}</p>
+    <p><strong>{{ __('messages.department') }}:</strong> {{ $subject->department->name ?? 'N/A' }}</p>
+    <p><strong>{{ __('messages.semesters') }}:</strong> {{ $subject->semesters->pluck('name')->join(', ') ?: 'N/A' }}</p>
+    <p><strong>{{ __('messages.hours_count') }}:</strong> {{ $subject->hours }}</p>
+    <p><strong>{{ __('messages.academic_years') }}:</strong> {{ $subject->academicYears->pluck('year')->join(', ') ?: 'N/A' }}</p>
+    <p><strong>{{ __('messages.doctors') }}:</strong> {{ $subject->doctors->pluck('name')->join(', ') ?: 'N/A' }}</p>
+    <p><strong>{{ __('messages.students_count') }}:</strong> {{ $subject->students_count }}</p>
 
+
+    <a href="{{ route('all.student.subject', $subject->id) }}" class="btn btn-primary">{{ __('messages.students') }}</a>
     <a href="{{ route('subjects.index') }}" class="btn btn-secondary">{{ __('messages.back') }}</a>
 
     <hr>

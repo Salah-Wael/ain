@@ -35,6 +35,7 @@ Route::controller(SubjectController::class)->group(function () {
     Route::get('doctor/subjects', 'doctorSubject')->middleware('role:Doctor,doctor')->name('subjects.doctor');
     Route::get('student/subjects', 'studentSubject')->middleware('role:Student')->name('subjects.student');
     Route::post('subjects/student/register', 'storeStudentRegisterSubjects')->middleware('role:Student')->name('subjects.student.register');
+    Route::get('subjects/students/{subject_id}', 'allStudentsSubject')->name('all.student.subject');
     Route::get('get/subjects/student/register', 'subjectsStudentMayRegister')->middleware('role:Student')->name('subjects.student.may.register');
     Route::get('subject/create', 'create')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.create');
     Route::post('subject', 'store')->middleware(['role:Super-Admin|Admin,admin'])->name('subjects.store');

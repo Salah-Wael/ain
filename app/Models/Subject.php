@@ -62,7 +62,7 @@ class Subject extends Model
 
     public function students()
     {
-        return $this->belongsToMany(User::class, 'student_subject', 'student_id', 'subject_id');
+        return $this->belongsToMany(User::class, 'student_subject', 'subject_id', 'student_id');
     }
 
     public function lectures()
