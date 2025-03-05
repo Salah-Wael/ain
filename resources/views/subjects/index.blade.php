@@ -19,13 +19,13 @@
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Department</th>
-                <th>Semesters</th>
-                <th>Academic Years</th>
-                <th>Doctors</th>
-                <th>Actions</th>
+                <th>{{ __('messages.subject_name') }}</th>
+                <th>{{ __('messages.subject_code') }}</th>
+                <th>{{ __('messages.department') }}</th>
+                <th>{{ __('messages.semesters') }}</th>
+                <th>{{ __('messages.academic_years') }}</th>
+                <th>{{ __('messages.doctors') }}</th>
+                <th>{{ __('messages.actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -39,15 +39,15 @@
                     <td>{{ $subject->doctors->pluck('name')->join(', ') ?: 'N/A' }}</td>
                     <td>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('subjects.show', $subject->id) }}" class="btn btn-info btn-sm">Show</a>
+                            <a href="{{ route('subjects.show', $subject->id) }}" class="btn btn-info btn-sm">{{ __('messages.show') }}</a>
                             @hasanyrole('Super-Admin|Admin', 'admin')
-                                <a href="{{ route('subjects.edit', $subject->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('subjects.edit', $subject->id) }}" class="btn btn-warning btn-sm">{{ __('messages.edit') }}</a>
                                 <form action="{{ route('subjects.destroy', $subject->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
                                         onclick="return confirm('Are you sure you want to delete this subject?')">
-                                        Delete
+                                        {{ __('messages.delete') }}
                                     </button>
                                 </form>
                             @endhasanyrole

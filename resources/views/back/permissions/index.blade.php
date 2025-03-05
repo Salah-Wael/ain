@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Permissions List')
+@section('title', __('messages.permissions') )
 
 @section('content')
     <div class="container mt-5">
@@ -18,10 +18,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Permission</th>
-                    <th>Roles</th>
-                    <th>Guard</th>
-                    <th>Actions</th>
+                    <th>{{ __('messages.permission') }}</th>
+                    <th>{{ __('messages.roles') }}</th>
+                    <th>{{ __('messages.guard_name') }}</th>
+                    <th>{{ __('messages.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,7 +50,7 @@
                             <form action="{{ route('back.permissions.destroy', $permission->id) }}" method="POST" style="display:inline-block">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger">{{ __('messages.delete') }}</button>
                             </form>
                         </td>
                     </tr>

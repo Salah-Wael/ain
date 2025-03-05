@@ -1,5 +1,7 @@
 @extends('layouts.app') {{-- Adjust based on your layout --}}
 
+
+@section('title', trans('messages.task_answers'))
 @section('content')
 <div class="container">
     <h2>{{ trans('messages.task_answers_for') }}: {{ $task->name }}</h2>

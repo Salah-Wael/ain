@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Permission')
+@section('title', __('messages.edit') . ' ' . __('messages.permission'))
 
 @section('content')
     <div class="container mt-5">
@@ -14,11 +14,11 @@
             @method('PUT') <!-- Use PUT method for updating the permission -->
 
             <div class="mb-3">
-                <label for="name" class="form-label">Permission Name</label>
+                <label for="name" class="form-label">{{ __('messages.permission'.' '. __('messages.name')) }}</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name',displayPermission($permission->name)) }}" required>
             </div>
 
-            <label for="guard_name" class="form-label">Guard Name</label>
+            <label for="guard_name" class="form-label">{{ __('messages.guard_name') }}</label>
             @foreach ($guardsArray as $guard)
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="guard_name" value="{{ $guard }}" id="guard_name_{{ $guard }}"

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 
 <html
-  lang="en"
   class="light-style customizer-hide"
-  dir="ltr"
+  dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}"
   data-theme="theme-default"
   data-assets-path="{{ asset('assets-head') }}/"
   data-template="vertical-menu-template-free"
@@ -63,7 +62,7 @@
             <div class="card-body">
                 <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
+                <a href="#" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                     <svg
                       width="25"
