@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', __('lang.roles'))
+@section('title', __('messages.roles'))
 @section('roles_active', 'active bg-light')
 @includeIf("$directory.pushStyles")
 
@@ -46,7 +46,7 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                   
+
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('back.roles.edit', ['role' => $item]) }}" class="btn btn-sm btn-warning flex-grow-1">
                                             {{ __('messages.edit') }}

@@ -25,6 +25,44 @@ if (!function_exists('sendError')) {
     }
 }
 
+function displayGuard($guardName){
+    if(app()->getLocale() == 'ar'){
+        switch ($guardName) {
+            case 'admin':
+                return 'أدمن';
+                break;
+            case 'head':
+                return 'رئيس قسم';
+                break;
+            case 'doctor':
+                return 'دكتور جامعي';
+                break;
+            case 'web':
+                return 'طالب';
+                break;
+            default:
+                return $guardName;
+        }
+    }else{
+        switch ($guardName) {
+            case 'admin':
+                return 'Admin';
+                break;
+            case 'head':
+                return 'Head Of Department';
+                break;
+            case 'doctor':
+                return 'Doctor';
+                break;
+            case 'web':
+                return 'Student';
+                break;
+            default:
+                return $guardName;
+        }
+    }
+    return $guardName;
+}
 function displayRole($roleName){
     $role = ucwords(str_replace('-', ' ', strtolower($roleName)));
     if(app()->getLocale() == 'ar'){

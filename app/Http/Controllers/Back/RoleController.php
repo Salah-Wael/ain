@@ -116,18 +116,12 @@ class RoleController extends Controller
      * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequest $request, Role $role)
+    public function update(Request $request, Role $role)
     {
-        $data = $request->validated();
-        $role->update([
-            'name' => str_replace(' ', '-', ucwords(strtolower($data['name']))),
-        ]);
-
-
         $role->syncPermissions();
-        if (isset($data['permissionArray'])) {
+        if (isset($request['permissionArray'])) {
             // foreach ($data['permissionArray'] as $permission => $value) {
-            $role->givePermissionTo(array_keys($data['permissionArray']));
+            $role->givePermissionTo(array_keys($request['permissionArray']));
             // }
         }
         return redirect()->route('back.roles.index');

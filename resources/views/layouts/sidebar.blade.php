@@ -242,12 +242,14 @@
                             <div data-i18n="Connections">{{ __('messages.my_subjects') }}</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="{{ route('subjects.student.may.register') }}" class="menu-link">
-                            <div data-i18n="Connections">{{ __('messages.register_subject') }}</div>
-                        </a>
-                    </li>
                     @endrole
+                    @can('register_subject')
+                        <li class="menu-item">
+                            <a href="{{ route('subjects.student.may.register') }}" class="menu-link">
+                                <div data-i18n="Connections">{{ __('messages.register_subject') }}</div>
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </li>
         @endif

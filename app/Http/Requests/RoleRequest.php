@@ -39,9 +39,9 @@ class RoleRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'            => __('lang.name'),
-            'guard_name'      => __('lang.guard_name'),
-            'permissionArray' => __('lang.permissions'),
+            'name'            => __('messages.name'),
+            'guard_name'      => __('messages.guard_name'),
+            'permissionArray' => __('messages.permissions'),
         ];
     }
 }

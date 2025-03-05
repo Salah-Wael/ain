@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', __('lang.add_new_role'))
+@section('title', __('messages.add_new_role'))
 @section('roles_active', 'active bg-light')
 @includeIf("$directory.pushStyles")
 
@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h2 class="h5 page-title">{{ __('lang.add_new_role') }}</h2>
+                <h2 class="h5 page-title">{{ __('messages.add_new_role') }}</h2>
             </div>
         </div>
     </div>
@@ -24,27 +24,27 @@
                 <div class="row">
 
                     <div class="form-group col-md-10">
-                        <label class="form-label">{{ __('lang.name') }}</label>
+                        <label class="form-label">{{ __('messages.name') }}</label>
                         <input type="text" class="border form-control" name="name"
-                            placeholder="{{ __('lang.please_enter') }} {{ __('lang.name') }}...">
+                            placeholder="{{ __('messages.please_enter') }} {{ __('messages.name') }}...">
                     </div>
                     <div class="form-group col-md-2 mt-4">
                         <label class="form-check-label text-primary mt-2">
                             <input class="form-check-input" type="checkbox" id="selectAll">
-                            @lang('lang.selectAll')
+                            @lang('messages.selectAll')
                         </label>
                     </div>
 
-                    <label for="guard_name" class="form-label">Guard Name</label>
+                    <label for="guard_name" class="form-label">{{ __('messages.guard_name') }}</label>
                     @foreach ($guardsArray as $guard)
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="guard_name" value="{{ $guard }}" id="guard_name_{{ $guard }}"
                                 @if($guard == 'admin') checked @endif required>
                             <label class="form-check-label" for="guard_name_{{ $guard }}">
                                 @if($guard == 'web')
-                                    User
+                                    {{ __('messages.student') }}
                                 @elseif ($guard == 'head')
-                                    Head Of Department
+                                    {{ __('messages.head_of_department') }}
                                 @else
                                     {{ ucwords($guard) }}
                                 @endif
@@ -74,7 +74,7 @@
                 {{-- MODIFICATIONS TO HERE --}}
 
                 <div class="form-group float-end mt-3">
-                    <button type="submit" class="btn btn-primary" id="submit_add_form">{{ __('lang.submit') }}</button>
+                    <button type="submit" class="btn btn-primary" id="submit_add_form">{{ __('messages.save') }}</button>
                 </div>
             </form>
         </div>
