@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($excuses as $excuse)
+                @forelse ($excuses as $excuse)
                     <tr>
                         <td>{{ $excuse->student->id }}</td>
                         <td>{{ $excuse->student->name }}</td>
@@ -73,7 +73,9 @@
 
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    {{ __('messages.not_found') . ' ' . __('messages.excuses') }}
+                @endforelse
             </tbody>
         </table>
         {{ $excuses->links() }}

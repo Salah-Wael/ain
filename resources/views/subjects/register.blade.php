@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+
+@section('title', __('messages.register_subjects'))
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Register for Subjects</h2>
+    <h2 class="mb-4">{{ __('messages.register_subjects') }}</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -23,11 +25,11 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Select</th>
-                    <th>Subject Name</th>
-                    <th>Department</th>
-                    <th>Doctor(s)</th>
-                    <th>Semester</th>
+                    <th>{{ __('messages.select') }}</th>
+                    <th>{{ __('messages.subject_name') }}</th>
+                    <th>{{ __('messages.department') }}</th>
+                    <th>{{ __('messages.doctors') }}</th>
+                    <th>{{ __('messages.semesters') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +56,7 @@
             </tbody>
         </table>
 
-        <button type="submit" class="btn btn-primary">Register Selected Subjects</button>
+        <button type="submit" class="btn btn-primary">{{ __('messages.register') }}</button>
     </form>
 </div>
 @endsection

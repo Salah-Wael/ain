@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Head;
 
+use App\Models\Excuse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
@@ -12,8 +14,8 @@ class HeadHomeController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('auth:head'),
-            new Middleware('role:Head-Of-Department'),
+            new Middleware('guardauth:head'),
+            new Middleware('role:Head-Of-Department,head'),
         ];
     }
     /**
@@ -21,6 +23,14 @@ class HeadHomeController extends Controller implements HasMiddleware
      */
     public function __invoke(Request $request)
     {
-        return view('head.home');
+        $excuses_count = Excuse::where('department_id', Auth::guard('head')->user()->department_id)
+        ->where('status', 'pending')
+        ->count();
+
+        $statistics = [
+            'total_excuses' => $excuses_count,
+        ];
+
+        return view('head.home', compact('statistics'));
     }
 }
