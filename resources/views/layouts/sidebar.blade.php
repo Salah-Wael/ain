@@ -253,7 +253,28 @@
                 </ul>
             </li>
         @endif
+        @hasanyrole('Super-Admin|Admin', 'admin')
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">{{ __('messages.departments') }}</div>
+            </a>
+            <ul class="menu-sub">
 
+                <li class="menu-item">
+                    <a href="{{ route('departments.index') }}" class="menu-link">
+                        <div data-i18n="Connections">{{ __('messages.all') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('departments.create') }}" class="menu-link">
+                        <div data-i18n="Connections">{{ __('messages.create') }}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endhasanyrole
+        
         @if(Auth::guard('head')->check() || auth()->user()?->hasRole('Student'))
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">

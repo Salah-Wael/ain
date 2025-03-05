@@ -7,6 +7,7 @@ use App\Http\Controllers\ExcuseController;
 use App\Http\Controllers\LectureController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\TaskAnswerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -25,6 +26,8 @@ Route::controller(ExcuseController::class)->name('excuses.')->group(function () 
     Route::patch('excuses/{id}/status', 'updateStatus')->name('update-status');
     Route::delete('excuses/{id}','destroy')->name('destroy');
 });
+
+Route::middleware('role:Super-Admin|Admin,admin')->resource('departments', DepartmentController::class);
 
             // middleware(['role:Super-Admin|Admin,admin'])
             // middleware('role:Doctor,doctor')
