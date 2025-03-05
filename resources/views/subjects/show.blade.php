@@ -13,8 +13,9 @@
     <p><strong>{{ __('messages.doctors') }}:</strong> {{ $subject->doctors->pluck('name')->join(', ') ?: 'N/A' }}</p>
     <p><strong>{{ __('messages.students_count') }}:</strong> {{ $subject->students_count }}</p>
 
-
-    <a href="{{ route('all.student.subject', $subject->id) }}" class="btn btn-primary">{{ __('messages.students') }}</a>
+    @if(Auth::guard('admin')->check() || Auth::guard('doctor')->check())
+        <a href="{{ route('all.student.subject', $subject->id) }}" class="btn btn-primary">{{ __('messages.students') }}</a>
+    @endif
     <a href="{{ route('subjects.index') }}" class="btn btn-secondary">{{ __('messages.back') }}</a>
 
     <hr>
