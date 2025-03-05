@@ -5,10 +5,6 @@
 @section('content')
     <h2>{{ __('messages.list') }}{{ __('messages.admins') }}</h2>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
     <a href="{{ route('back.admins.create') }}" class="btn btn-primary">{{ __('messages.create') }} {{ __('messages.admin') }}</a>
 
     <table class="table table-striped mt-4">
